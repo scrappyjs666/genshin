@@ -1,11 +1,21 @@
-import React from "react";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomaPage/HomePage';
+import Header from './components/Header/Header';
+import Container from './components/Container/Container';
 
-function App() {
-  console.log("1");
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <div>mem</div>
-    </div>
+    <>
+      <Header children={undefined}/>
+      <Container>
+        <Routes>
+          <Route 
+            path="/" 
+            element={<HomePage />} />
+        </Routes>
+      </Container>
+    </>
   );
 }
 
