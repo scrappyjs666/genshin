@@ -8,9 +8,8 @@ const  Filter: React.FC<Props> = () => {
   return(
     <>
       <div className={styles.filter}>
-        <FilterBtn name={'name'} />
-        <FilterBtn name={'rating'} />
-        <FilterBtn name={'birthday'} />
+        <FilterBtn name={'name A-Z'} />
+        <FilterBtn name={'name Z-A'} />
       </div>
     </>
   )

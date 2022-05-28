@@ -8,11 +8,11 @@ interface card {
   btnText: string,
   imgBtn: string;
   styleBack?: string | number;
-  onClick: (item: string, i: number) => void;
-  indexBtnActive: Function;
+  indexisbtnActive: Function;
+  color: string;
 }
 
-const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, indexBtnActive }) => {
+const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, indexisbtnActive, color }) => {
   return(
     <>
       <div 
@@ -20,7 +20,8 @@ const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, indexBtnActiv
         <h2 className={styles.heroCard__title}>{title}</h2>
         <img src={img}/>
         <button
-          onClick={(item: string, i: number)=>  indexBtnActive(item, i)}
+          style={{backgroundColor: `${color}`}}
+          onClick={():void => indexisbtnActive()}
           className={styles.hero__add}>
           <img src={imgBtn}/>
           {btnText}
