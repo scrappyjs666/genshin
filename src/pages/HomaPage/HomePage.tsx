@@ -12,10 +12,9 @@ const  HomePage: React.FC = () => {
   const [characters, setCharacters] = useState<string[]>([]);
   const [isbtnActive, isSetisbtnActive] = useState<number[]>([]);
   const [colorBtn, setColorBtn] = useState('#f23');
-  const [arrayLenght, setArrayLenght] = useState(40);
+  const [arrayLenght, setArrayLenght] = useState(8);
 
   const indexisbtnActive = (item: string, i:number):void => {
-    console.log(isbtnActive)
     isSetisbtnActive([...isbtnActive, i]);
     if(isbtnActive.includes(i)) {
       const newisbtnActive = isbtnActive.filter((index) => index !== i);
@@ -42,7 +41,11 @@ const  HomePage: React.FC = () => {
 
 
   const scrollHandler = ():void => {
-    console.log(document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight))
+    if(document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) < 100) {
+      setArrayLenght((prevValue) => {
+        return prevValue + 8;
+      });
+    }
   }
 
   const excludedData = ['thoma', 'traveler-geo', 'traveler-electro', 'traveler-anemo','raiden', 'ayaka', 'sara','kokomi','kazuha'];

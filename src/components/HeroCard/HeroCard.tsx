@@ -15,7 +15,7 @@ interface card {
 
 const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, indexisbtnActive, color, id }) => {
   return(
-    <Link to={`/HeroPage/${id}`}>
+    <Link to={`/HeroPage/${id}`} target="_blank">
       <>
         <div 
           className={styles.heroCard__container}>
