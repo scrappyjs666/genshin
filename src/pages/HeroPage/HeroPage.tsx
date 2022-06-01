@@ -1,6 +1,6 @@
 import styles from './HeroPage.module.scss';
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getApiResource } from '../../api/network';
 import HeroPageWrap from './HeroPageWrap/HeroPageWrap';
@@ -24,13 +24,15 @@ const  HeroPage: React.FC = () => {
 
   const [HeroInfo, setHeroInfo] = useState<IHero>();
   const {id} = useParams();
-  const url = `https://api.genshin.dev/characters/${id}`;
+  const location = useLocation();
+  const urlParams = location.pathname.split('/');
+  const urlCategory = urlParams[2];
+  const url = `https://api.genshin.dev/${urlCategory}/${id}`;
 
   useEffect(() => {
     getApiResource(url)
       .then((data) => {
         setHeroInfo(data);
-        console.log(data)
       });
   }, []);
   return(

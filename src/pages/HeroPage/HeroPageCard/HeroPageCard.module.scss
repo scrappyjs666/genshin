@@ -1,4 +1,9 @@
 .heroPageCard__container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
   background-color: #fff;
   position: relative;
   box-shadow: 0 0 7px 7px #fff, 0 0 10px 10px #f23;
@@ -13,6 +18,7 @@
   justify-self: flex-end;
 }
 
-.btn__image {
+.heroPageCard__image {
   position: absolute;
+  min-width: 240px;
 }

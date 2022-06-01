@@ -1,9 +1,12 @@
 .heroCard__container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
   position: relative;
-  box-shadow: 0 0 7px 7px #fff, 0 0 10px 10px #f23;
-  width: 310px;
-  height: 524px;
+  box-shadow: 0 0 10px 5px #fff, 0 0 10px 5px rgb(202, 223, 15);
+  max-width: 310px;
+  max-height: 524px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -11,6 +14,10 @@
   -o-border-radius: 5px;
   margin: 20px 0;
   overflow: hidden;
+}
+
+.heroCard__img {
+  min-width: 240px;
 }
 
 .heroCard__title {

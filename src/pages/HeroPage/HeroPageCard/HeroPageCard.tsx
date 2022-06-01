@@ -11,7 +11,7 @@ const  HeroPageCard: React.FC<IHeroPageCard> = ({ img }) => {
     <>
       <Tilt className={styles.heroPageCard__container}>
         <img 
-          className={styles.btn__image}  
+          className={styles.heroPageCard__image}  
           src={img}/>
       </Tilt>
     </>

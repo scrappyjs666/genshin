@@ -1,16 +1,17 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomaPage/HomePage';
+import HeroPageList from './pages/HeroPageList/HeroPageList';
 import Header from './components/Header/Header';
 import HeroPage from './pages/HeroPage/HeroPage';
-import { useState, useContext } from 'react';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import { store } from './Store/store';
+import Basket from './components/Basket/Basket';
+import HomePage from './pages/HomePage/HomePage';
 
 const App: React.FC = () => {
 
   return (
     <>
+      <Basket/>
       <Header 
         children={undefined}/>
       <Routes>
@@ -18,7 +19,10 @@ const App: React.FC = () => {
           path="/" 
           element={<HomePage />} />
         <Route 
-          path="/HeroPage/:id" 
+          path="/HeroPageList/:id" 
+          element={<HeroPageList />} />
+        <Route 
+          path="/HeroPage/:category/:id" 
           element={<HeroPage />} />
         <Route 
           path="*" 
