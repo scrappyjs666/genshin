@@ -7,6 +7,7 @@ import HeroPageWrap from './HeroPageWrap/HeroPageWrap';
 import HeroPageCard from './HeroPageCard/HeroPageCard';
 import HeroPageDescr from './HeroPageDescr/HeroPageDescr';
 import startimg from './img/star.svg';
+import { stringify } from 'querystring';
 
 const  HeroPage: React.FC = () => {
   interface IHero {
@@ -28,18 +29,21 @@ const  HeroPage: React.FC = () => {
   const urlParams = location.pathname.split('/');
   const urlCategory = urlParams[2];
   const url = `https://api.genshin.dev/${urlCategory}/${id}`;
+  let b: { [x: string]: unknown; }[] = []
 
   useEffect(() => {
     getApiResource(url)
       .then((data) => {
-        setHeroInfo(data);
+        b = Object.entries(data).map(([k, v]) => ({ [k]: v }))
+        console.log(b.flat(Infinity))
       });
   }, []);
   return(
     <>
+      {b.map((el:any) => <div className='mem'>{el.name}</div>)}
       <HeroPageWrap title={String(HeroInfo?.name.toLowerCase())}>
         <HeroPageCard
-          img={`/images/characters/${String(HeroInfo?.name.toLowerCase().replace(/ /g, '-'))}/gacha-card`}
+          img={'1'}
         />
         <HeroPageDescr
           affiliation={HeroInfo?.affiliation}
@@ -52,7 +56,7 @@ const  HeroPage: React.FC = () => {
           vision={HeroInfo?.vision}
           weapon={HeroInfo?.weapon}
           weapon_type={HeroInfo?.weapon_type}
-          visionImg={`/images/elements/${String(HeroInfo?.vision.toLowerCase())}/icon`}
+          visionImg={'1'}
         />
       </HeroPageWrap> 
     </>
@@ -60,3 +64,5 @@ const  HeroPage: React.FC = () => {
 }
 
 export default HeroPage;
+// visionImg={`/images/elements/${String(HeroInfo?.vision.toLowerCase())}/icon`}
+// img={`/images/characters/${String(HeroInfo?.name.toLowerCase().replace(/ /g, '-'))}/gacha-card`}

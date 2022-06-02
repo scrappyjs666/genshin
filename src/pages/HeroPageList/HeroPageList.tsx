@@ -22,7 +22,6 @@ const  HeroPageList: React.FC = () => {
   const dispatch = useDispatch()
   
   const {id} = useParams();
-  console.log(id)
   const url = `https://api.genshin.dev/${id}`;
 
   const indexisbtnActive = (item: string, i:number):void => {
@@ -37,6 +36,7 @@ const  HeroPageList: React.FC = () => {
     getApiResource(url)
       .then((data) => {
         setData(data);
+        console.log(data)
       });
   }, []);
 
