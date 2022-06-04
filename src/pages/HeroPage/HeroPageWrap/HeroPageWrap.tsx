@@ -11,7 +11,7 @@ const  HeroPageWrap: React.FC<Props> = ({ children, title }) => {
     <>
       <main className={styles.HeroPage__main}>
         <h2 className={styles.HeroPage__title}>
-          HeroInfo: {title}
+          Info: {title}
         </h2>
         {children}
       </main>

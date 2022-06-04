@@ -7,62 +7,98 @@ import HeroPageWrap from './HeroPageWrap/HeroPageWrap';
 import HeroPageCard from './HeroPageCard/HeroPageCard';
 import HeroPageDescr from './HeroPageDescr/HeroPageDescr';
 import startimg from './img/star.svg';
-import { stringify } from 'querystring';
+import EnemyPageDescr from './EnemyPageDescr/EnemyPageDescr';
+import WeaponPageDescr from './WeaponPageDescr/WeaponPageDescr';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment } from '../../Store/slices/searchSlice';
+import { RootState } from '../../Store/store';
+import { IHero } from './Interface';
 
 const  HeroPage: React.FC = () => {
-  interface IHero {
-    affiliation: string;
-    birthday: string;
-    constellation: string;
-    description: string;
-    name: string;
-    nation: string;
-    rarity: number;
-    vision: string;
-    weapon: string;
-    weapon_type: string;
-  }
-
+  const count = useSelector((state: RootState) => state.search.value)
+  const dispatch = useDispatch()
+  
   const [HeroInfo, setHeroInfo] = useState<IHero>();
   const {id} = useParams();
   const location = useLocation();
   const urlParams = location.pathname.split('/');
   const urlCategory = urlParams[2];
   const url = `https://api.genshin.dev/${urlCategory}/${id}`;
-  let b: { [x: string]: unknown; }[] = []
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getApiResource(url)
       .then((data) => {
-        b = Object.entries(data).map(([k, v]) => ({ [k]: v }))
-        console.log(b.flat(Infinity))
+        setHeroInfo(data);
       });
   }, []);
+
+  const img = urlCategory === 'characters' ? `/images/characters/${String(HeroInfo?.name.toLowerCase().replace(/ /g, '-'))}/gacha-card` :
+    `/images/${urlCategory}/${urlParams[3]}/icon`;
+  
   return(
     <>
-      {b.map((el:any) => <div className='mem'>{el.name}</div>)}
-      <HeroPageWrap title={String(HeroInfo?.name.toLowerCase())}>
+      <div>
+        <div>
+          <button
+            aria-label="Increment value"
+            onClick={() => dispatch(increment())}
+          >
+          Increment
+          </button>
+          <span>{count}</span>
+          <button
+            aria-label="Decrement value"
+            onClick={() => dispatch(decrement())}
+          >
+          Decrement
+          </button>
+        </div>
+      </div>
+      <HeroPageWrap title={urlParams[3]}>
         <HeroPageCard
-          img={'1'}
+          img={img}
         />
-        <HeroPageDescr
-          affiliation={HeroInfo?.affiliation}
-          birthday={HeroInfo?.birthday}
-          constellation={HeroInfo?.constellation}
-          description={HeroInfo?.description}
-          nation={HeroInfo?.nation}
-          rarity={HeroInfo?.rarity}
-          rarityImg={startimg}
-          vision={HeroInfo?.vision}
-          weapon={HeroInfo?.weapon}
-          weapon_type={HeroInfo?.weapon_type}
-          visionImg={'1'}
-        />
+        {urlCategory === 'characters' ? 
+          <HeroPageDescr
+            affiliation={HeroInfo?.affiliation}
+            birthday={HeroInfo?.birthday}
+            constellation={HeroInfo?.constellation}
+            description={HeroInfo?.description}
+            nation={HeroInfo?.nation}
+            rarity={HeroInfo?.rarity}
+            rarityImg={startimg}
+            vision={HeroInfo?.vision}
+            weapon={HeroInfo?.weapon}
+            weapon_type={HeroInfo?.weapon_type}
+            visionImg={`/images/elements/${String(HeroInfo?.vision.toLowerCase())}/icon`}
+          /> : null}
+        {urlCategory === 'enemies' ? 
+          <EnemyPageDescr 
+            id={HeroInfo?.id} 
+            name={HeroInfo?.name} 
+            description={HeroInfo?.description} 
+            region={HeroInfo?.region} 
+            type={HeroInfo?.type} 
+            family={HeroInfo?.family} 
+            Faction={HeroInfo?.faction}             
+          /> : null}
+        {urlCategory === 'weapons' ? 
+          <WeaponPageDescr 
+            ascensionMaterial={HeroInfo?.ascensionMaterial}
+            baseAttack={HeroInfo?.baseAttack}
+            location={HeroInfo?.location}
+            name={HeroInfo?.name}
+            passiveDesc={HeroInfo?.passiveDesc}
+            passiveName={HeroInfo?.passiveName}
+            rarity={HeroInfo?.rarity}
+            subStat={HeroInfo?.subStat}
+            type={HeroInfo?.type} 
+            rarityImg={startimg}          
+          /> : null}
       </HeroPageWrap> 
     </>
   )
 }
 
 export default HeroPage;
-// visionImg={`/images/elements/${String(HeroInfo?.vision.toLowerCase())}/icon`}
-// img={`/images/characters/${String(HeroInfo?.name.toLowerCase().replace(/ /g, '-'))}/gacha-card`}

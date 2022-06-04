@@ -33,10 +33,10 @@ const  HeroPageList: React.FC = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getApiResource(url)
       .then((data) => {
         setData(data);
-        console.log(data)
       });
   }, []);
 
@@ -75,6 +75,23 @@ const  HeroPageList: React.FC = () => {
 
   return(
     <>
+      <div>
+        <div>
+          <button
+            aria-label="Increment value"
+            onClick={() => dispatch(increment())}
+          >
+          Increment
+          </button>
+          <span>{count}</span>
+          <button
+            aria-label="Decrement value"
+            onClick={() => dispatch(decrement())}
+          >
+          Decrement
+          </button>
+        </div>
+      </div>
       <Container>
         {data
           .filter(val => !excludedData.includes(val))
