@@ -1,16 +1,16 @@
-/* eslint-disable no-constant-condition */
-import styles from './HeroPageList.module.scss';
 import React from 'react';
 import { getApiResource } from '../../api/network';
 import { useState, useEffect } from 'react';
 import HeroCard from '../../components/HeroCard/HeroCard';
 import imgBtn from './img/star.svg';
 import Container from '../../components/Container/Container';
-import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment } from '../../Store/slices/searchSlice';
+import { decrement, increment } from '../../Store/counterSlice';
 import { RootState } from '../../Store/store';
 import { useParams } from 'react-router-dom';
-
+import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import Filter from '../../components/Filter/Filter';
+import styles from './HeroPageList.module.scss';
 
 const  HeroPageList: React.FC = () => {
   const [data, setData] = useState<string[]>([]);
@@ -18,8 +18,9 @@ const  HeroPageList: React.FC = () => {
   const [colorBtn, setColorBtn] = useState('#f23');
   const [arrayLenght, setArrayLenght] = useState(10);
 
-  const count = useSelector((state: RootState) => state.search.value)
-  const dispatch = useDispatch()
+
+  const count = useAppSelector((state) => state.counter.value)
+  const dispatch = useAppDispatch()
   
   const {id} = useParams();
   const url = `https://api.genshin.dev/${id}`;
@@ -49,11 +50,11 @@ const  HeroPageList: React.FC = () => {
   })
 
   const sortAZ = ():void => {
-    setData(data.reverse());
+    setData([...data].sort());
   }
 
   const sortZA = ():void => {
-    setData(data.sort());
+    setData([...data].reverse());
   }
 
 
@@ -75,22 +76,10 @@ const  HeroPageList: React.FC = () => {
 
   return(
     <>
-      <div>
-        <div>
-          <button
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
-          >
-          Increment
-          </button>
-          <span>{count}</span>
-          <button
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
-          >
-          Decrement
-          </button>
-        </div>
+      <div className={styles.HeroPage__filter}>
+        <Filter 
+          sortAZ={sortAZ} 
+          sortZA={sortZA}/>
       </div>
       <Container>
         {data

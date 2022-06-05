@@ -10,14 +10,15 @@ import startimg from './img/star.svg';
 import EnemyPageDescr from './EnemyPageDescr/EnemyPageDescr';
 import WeaponPageDescr from './WeaponPageDescr/WeaponPageDescr';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment } from '../../Store/slices/searchSlice';
+import { decrement, increment } from '../../Store/counterSlice';
 import { RootState } from '../../Store/store';
 import { IHero } from './Interface';
+import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks';
 
 const  HeroPage: React.FC = () => {
-  const count = useSelector((state: RootState) => state.search.value)
-  const dispatch = useDispatch()
-  
+  const count = useAppSelector((state) => state.counter.value)
+  const dispatch = useAppDispatch()
+
   const [HeroInfo, setHeroInfo] = useState<IHero>();
   const {id} = useParams();
   const location = useLocation();
@@ -38,23 +39,6 @@ const  HeroPage: React.FC = () => {
   
   return(
     <>
-      <div>
-        <div>
-          <button
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
-          >
-          Increment
-          </button>
-          <span>{count}</span>
-          <button
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
-          >
-          Decrement
-          </button>
-        </div>
-      </div>
       <HeroPageWrap title={urlParams[3]}>
         <HeroPageCard
           img={img}
