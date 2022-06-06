@@ -1,43 +1,53 @@
 import React from 'react';
 import { getApiResource } from '../../api/network';
 import { useState, useEffect } from 'react';
-import HeroCard from '../../components/HeroCard/HeroCard';
+import HeroCard from '../../components/HeroCard';
 import imgBtn from './img/star.svg';
-import Container from '../../components/Container/Container';
-import { decrement, increment } from '../../Store/counterSlice';
-import { RootState } from '../../Store/store';
+import Container from '../../components/Container';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks';
-import { useDispatch, useSelector } from 'react-redux';
-import Filter from '../../components/Filter/Filter';
+import Filter from '../../components/Filter';
 import styles from './HeroPageList.module.scss';
+import debounce from 'lodash.debounce';
+import { addItem, addIndex } from '../../Store/heroListSlice';
+import Loader from '../../components/UI/Loader';
 
 const  HeroPageList: React.FC = () => {
   const [data, setData] = useState<string[]>([]);
-  const [isbtnActive, isSetisbtnActive] = useState<number[]>([]);
   const [colorBtn, setColorBtn] = useState('#f23');
   const [arrayLenght, setArrayLenght] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // const testDebounce = (() => {
+  //   console.log('Hello')
+  // }, 250)
+
+  // if (localStorage.getItem('items')) {
+  //   const item = JSON.parse(localStorage.getItem('items')!);
+  //   console.log(item)
+  // }
+  
 
   const count = useAppSelector((state) => state.counter.value)
+  const heroArray = useAppSelector((state) => state.heroList.items)
+  const heroIndex = useAppSelector((state) => state.heroList.arrayIndex)
   const dispatch = useAppDispatch()
+
+  const addHero = (item:string, index:number):void => {
+    dispatch(addItem(item))
+    dispatch(addIndex(index))
+  } 
   
   const {id} = useParams();
   const url = `https://api.genshin.dev/${id}`;
-
-  const indexisbtnActive = (item: string, i:number):void => {
-    isSetisbtnActive([...isbtnActive, i]);
-    if(isbtnActive.includes(i)) {
-      const newisbtnActive = isbtnActive.filter((index) => index !== i);
-      isSetisbtnActive(newisbtnActive)
-    }
-  }
-
+  
   useEffect(() => {
+    setIsLoading(true)
     window.scrollTo(0, 0);
     getApiResource(url)
       .then((data) => {
         setData(data);
+        setTimeout(() => {setIsLoading(false)}, 1500);
       });
   }, []);
 
@@ -71,36 +81,40 @@ const  HeroPageList: React.FC = () => {
   const added = 'added to favorites';
   const selected = `choose your favorite ${id}`;
 
-
   const img = id !== 'characters' ? '/icon' : '/gacha-card';
 
   return(
     <>
-      <div className={styles.HeroPage__filter}>
-        <Filter 
-          sortAZ={sortAZ} 
-          sortZA={sortZA}/>
-      </div>
-      <Container>
-        {data
-          .filter(val => !excludedData.includes(val))
-          .slice(0,arrayLenght)
-          .map((item, i) =>
-            (<HeroCard
-              category={id}
-              id={item}
-              minHeight={id == 'weapons' ?  '240px' : ''}
-              color={isbtnActive.includes(i) === true ? colorBtn : ''}
-              key={item}
-              title={item}
-              img={`../images/${id}/${item}${img}`}
-              imgBtn={isbtnActive.includes(i) === true ? imgBtn : ''}
-              btnText={isbtnActive.includes(i) === true ? added : selected}
-              indexisbtnActive={():void => indexisbtnActive(item, i)}
-            />))}
-      </Container>
+      {isLoading ? <Loader/>: 
+        <>
+          <div className={styles.HeroPage__filter}>
+            <Filter
+              sortAZ={sortAZ}
+              sortZA={sortZA} />
+          </div>
+          <Container>
+            {data
+              .filter(val => !excludedData.includes(val))
+              .slice(0, arrayLenght)
+              .map((item, i) => (
+                <HeroCard
+                  category={id}
+                  id={item}
+                  minHeight={id == 'weapons' ? '240px' : ''}
+                  color={heroIndex.includes(i) === true ? colorBtn : ''}
+                  key={item}
+                  title={item}
+                  img={`../images/${id}/${item}${img}`}
+                  imgBtn={heroIndex.includes(i) === true ? imgBtn : ''}
+                  btnText={heroIndex.includes(i) === true ? added : selected}
+                  addHero={(): void => addHero(item, i)} />))}
+          </Container>
+        </>
+      }
     </>
   )
 }
 
 export default HeroPageList;
+
+

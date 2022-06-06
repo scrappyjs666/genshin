@@ -1,6 +1,6 @@
 import styles from './Filter.module.scss';
 import React from 'react';
-import FilterBtn from './FilterBtn/FilterBtn';
+import FilterBtn from './FilterBtn';
 
 interface IFilter {
   sortAZ: Function,

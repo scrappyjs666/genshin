@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const  Basket: React.FC = () => {
   return(
     <>
-      <Link className={styles.basket} to="/HeroPage">
+      <Link className={styles.basket} to="/BasketPage">
         GO<br/>favorites
       </Link>
     </>

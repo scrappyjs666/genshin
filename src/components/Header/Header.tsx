@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 import React from 'react';
-import Logo from './Logo/Logo';
-import Search from './Search/Search';
+import Logo from './Logo';
+import Search from './Search';
 import { Link } from 'react-router-dom';
 
 type Props = { children: React.ReactNode };

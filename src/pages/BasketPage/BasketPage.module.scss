@@ -1,0 +1,20 @@
+.BasketPage__wrapper {
+  display: grid;
+  justify-content: center;
+  margin-top: 50px;
+  text-align: center;
+  gap: 20px;
+}
+
+.BasketPage__goods {
+  margin-bottom: 50px;
+  font-size: 40px;
+  text-shadow:  0 0 15px rgb(202, 223, 15);
+  font-weight: 600;
+}
+
+.Basket__chapter {
+  font-size: 30px;
+  text-shadow:  0 0 10px #fff;
+  font-weight: 400;
+}

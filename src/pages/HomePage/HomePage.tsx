@@ -1,6 +1,6 @@
 import styles from './HomePage.module.scss';
 import React from 'react';
-import HeroPageCard from '../HeroPage/HeroPageCard/HeroPageCard';
+import HeroPageCard from '../HeroPage/HeroPageCard';
 import { Link } from 'react-router-dom';
 
 

@@ -1,5 +1,5 @@
 import styles from './HeroCard.module.scss';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 
 interface card {
@@ -8,14 +8,14 @@ interface card {
   btnText: string,
   imgBtn: string;
   styleBack?: string | number;
-  indexisbtnActive: Function;
   color: string;
   id: string;
   minHeight: string;
   category: string | undefined;
+  addHero: Function;
 }
 
-const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, indexisbtnActive, color, id, minHeight,category }) => {
+const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, color, id, minHeight,category, addHero }) => {
   return(
     <Link to={`/HeroPage/${category}/${id}`} target="_blank">
       <>
@@ -30,7 +30,10 @@ const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, indexisbtnAct
           />
           <button
             style={{backgroundColor: `${color}`}}
-            onClick={(e):void => { e.preventDefault(); indexisbtnActive() } }
+            onClick={(e):void => { 
+              e.preventDefault(); 
+              addHero() } 
+            }
             className={styles.hero__add}>
             <img 
               src={imgBtn}
