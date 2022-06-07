@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom';
 
 interface card {
   img: string,
-  title: string,
-  btnText: string,
-  imgBtn: string;
+  title?: string,
+  btnText?: string,
+  imgBtn?: string;
   styleBack?: string | number;
-  color: string;
-  id: string;
-  minHeight: string;
-  category: string | undefined;
-  addHero: Function;
+  color?: string;
+  id?: string;
+  minHeight?: string;
+  category?: string | undefined;
+  addHero?: Function;
+  findIndex?: Function;
 }
 
-const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, color, id, minHeight,category, addHero }) => {
+const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, color, id, minHeight,category, addHero, findIndex }) => {
   return(
     <Link to={`/HeroPage/${category}/${id}`} target="_blank">
       <>
@@ -32,7 +33,9 @@ const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, color, id, mi
             style={{backgroundColor: `${color}`}}
             onClick={(e):void => { 
               e.preventDefault(); 
-              addHero() } 
+              addHero?.() 
+              findIndex?.()
+            } 
             }
             className={styles.hero__add}>
             <img 

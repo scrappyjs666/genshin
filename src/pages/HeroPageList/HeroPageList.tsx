@@ -32,14 +32,18 @@ const  HeroPageList: React.FC = () => {
   const heroArray = useAppSelector((state) => state.heroList.items)
   const heroIndex = useAppSelector((state) => state.heroList.arrayIndex)
   const dispatch = useAppDispatch()
-
-  const addHero = (item:string, index:number):void => {
-    dispatch(addItem(item))
-    dispatch(addIndex(index))
-  } 
   
   const {id} = useParams();
   const url = `https://api.genshin.dev/${id}`;
+
+  const addHero = (item:string, index:number):void => {
+    dispatch(addItem({
+        id,
+        item
+    }))
+    dispatch(addIndex(index))
+    console.log(heroArray)
+  } 
   
   useEffect(() => {
     setIsLoading(true)

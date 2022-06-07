@@ -1,6 +1,6 @@
 import styles from './BasketPage.module.scss';
 import React from 'react';
-import { SwiperBakset } from '../../components/Swiper/Swiper';
+import SwiperBakset from '../../components/Swiper/Swiper';
 
 const  BasketPage:React.FC = () => {
   return(

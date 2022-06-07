@@ -2,13 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
 
 interface HeroList {
-  items: string[];
+  items: Object[{
+    id:string,
+    item:string,
+  }];
   arrayIndex: number[];
 }
 
 const initialState: HeroList = {
   items: [],
-  arrayIndex:[],
+  arrayIndex: [],
 }
 
 export const heroListSlice = createSlice({
@@ -16,10 +19,6 @@ export const heroListSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<string>) => {
-      if(state.items.includes(action.payload)) {
-        state.items = state.items.filter((item) => item !== action.payload);
-        return
-      }
       state.items.push(action.payload)
       localStorage.setItem('items', JSON.stringify(state.items));
     },
