@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks';
 import Loader from '../../components/UI/Loader';
 
 const  HeroPage: React.FC = () => {
-  const count = useAppSelector((state) => state.counter.value)
   const dispatch = useAppDispatch()
 
   const [HeroInfo, setHeroInfo] = useState<IHero>();

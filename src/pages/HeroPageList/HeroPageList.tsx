@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks';
 import Filter from '../../components/Filter';
 import styles from './HeroPageList.module.scss';
 import debounce from 'lodash.debounce';
-import { addItem, addIndex } from '../../Store/heroListSlice';
+import { addItem } from '../../Store/heroListSlice';
 import Loader from '../../components/UI/Loader';
 
 const  HeroPageList: React.FC = () => {
@@ -26,23 +26,22 @@ const  HeroPageList: React.FC = () => {
   //   const item = JSON.parse(localStorage.getItem('items')!);
   //   console.log(item)
   // }
-  
-
-  const count = useAppSelector((state) => state.counter.value)
   const heroArray = useAppSelector((state) => state.heroList.items)
-  const heroIndex = useAppSelector((state) => state.heroList.arrayIndex)
   const dispatch = useAppDispatch()
   
   const {id} = useParams();
   const url = `https://api.genshin.dev/${id}`;
+  
 
   const addHero = (item:string, index:number):void => {
-    dispatch(addItem({
-        id,
-        item
-    }))
-    dispatch(addIndex(index))
+    const elements = {
+      id,
+      item
+    }
+    dispatch(addItem(elements))
     console.log(heroArray)
+    const b = heroArray.find(el => el.item === 'aloy')
+    console.log(b)
   } 
   
   useEffect(() => {
@@ -71,7 +70,6 @@ const  HeroPageList: React.FC = () => {
     setData([...data].reverse());
   }
 
-
   const scrollHandler = ():void => {
     if(document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) < 100) {
       setArrayLenght((prevValue) => {
@@ -84,8 +82,8 @@ const  HeroPageList: React.FC = () => {
 
   const added = 'added to favorites';
   const selected = `choose your favorite ${id}`;
-
   const img = id !== 'characters' ? '/icon' : '/gacha-card';
+  
 
   return(
     <>
@@ -105,12 +103,12 @@ const  HeroPageList: React.FC = () => {
                   category={id}
                   id={item}
                   minHeight={id == 'weapons' ? '240px' : ''}
-                  color={heroIndex.includes(i) === true ? colorBtn : ''}
+                  color={data.includes(item) === true ? colorBtn : ''}
                   key={item}
                   title={item}
                   img={`../images/${id}/${item}${img}`}
-                  imgBtn={heroIndex.includes(i) === true ? imgBtn : ''}
-                  btnText={heroIndex.includes(i) === true ? added : selected}
+                  imgBtn={data.includes(item) === true ? imgBtn : ''}
+                  btnText={data.includes(item) === true ? added : selected}
                   addHero={(): void => addHero(item, i)} />))}
           </Container>
         </>

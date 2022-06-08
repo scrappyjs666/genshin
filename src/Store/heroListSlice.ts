@@ -1,38 +1,41 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ObjectType } from 'typescript';
 import type { RootState } from './store'
 
+
+type Hero = {
+  id: string | undefined,
+  item: string
+}
+
 interface HeroList {
-  items: Object[{
-    id:string,
-    item:string,
-  }];
-  arrayIndex: number[];
+  items: Hero[];
+  elements: {
+    id: string | undefined;
+    item: string;
+  }
 }
 
 const initialState: HeroList = {
   items: [],
-  arrayIndex: [],
+  elements: {
+    id:'',
+    item:'',
+  }
 }
 
 export const heroListSlice = createSlice({
   name: 'heroList',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<string>) => {
+    addItem: (state, action: PayloadAction<Hero>) => {
       state.items.push(action.payload)
       localStorage.setItem('items', JSON.stringify(state.items));
-    },
-    addIndex: (state, action: PayloadAction<number>) => {
-      if(state.arrayIndex.includes(action.payload)) {
-        state.arrayIndex = state.arrayIndex.filter((item) => item !== action.payload);
-        return
-      }
-      state.arrayIndex.push(action.payload)
     },
   },
 })
 
-export const { addIndex, addItem } = heroListSlice.actions
+export const { addItem } = heroListSlice.actions
 
 export const selectCount = (state: RootState) => state.heroList.items
 
