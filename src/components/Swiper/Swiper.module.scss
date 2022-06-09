@@ -1,4 +1,13 @@
-.Swipper__wrap {
-  display: flex;
-  gap: 30px;
+.basket__wrapper {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 15px;
+}
+
+.Swiper__title {
+  font-size: 30px;
+  margin-bottom: 10px;
+  font-weight: 400;
+  text-shadow: 0 0 20px #fff;
 }

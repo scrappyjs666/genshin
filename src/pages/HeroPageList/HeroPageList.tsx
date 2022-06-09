@@ -14,10 +14,9 @@ import Loader from '../../components/UI/Loader';
 
 const  HeroPageList: React.FC = () => {
   const [data, setData] = useState<string[]>([]);
-  const [colorBtn, setColorBtn] = useState('#f23');
   const [arrayLenght, setArrayLenght] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
-
+  const dispatch = useAppDispatch();
   // const testDebounce = (() => {
   //   console.log('Hello')
   // }, 250)
@@ -26,12 +25,16 @@ const  HeroPageList: React.FC = () => {
   //   const item = JSON.parse(localStorage.getItem('items')!);
   //   console.log(item)
   // }
-  const heroArray = useAppSelector((state) => state.heroList.items)
-  const dispatch = useAppDispatch()
+  const colorBtn = useAppSelector((state) => state.heroList.colorBtn)
+  let heroArray = useAppSelector((state) => state.heroList.items)
+  if (localStorage.getItem('items')) {
+    heroArray = JSON.parse(localStorage.getItem('items')!);
+    console.log(heroArray, '23132')
+  }
   
   const {id} = useParams();
   const url = `https://api.genshin.dev/${id}`;
-  
+
 
   const addHero = (item:string, index:number):void => {
     const elements = {
@@ -39,9 +42,6 @@ const  HeroPageList: React.FC = () => {
       item
     }
     dispatch(addItem(elements))
-    console.log(heroArray)
-    const b = heroArray.find(el => el.item === 'aloy')
-    console.log(b)
   } 
   
   useEffect(() => {
@@ -83,7 +83,6 @@ const  HeroPageList: React.FC = () => {
   const added = 'added to favorites';
   const selected = `choose your favorite ${id}`;
   const img = id !== 'characters' ? '/icon' : '/gacha-card';
-  
 
   return(
     <>
@@ -103,12 +102,12 @@ const  HeroPageList: React.FC = () => {
                   category={id}
                   id={item}
                   minHeight={id == 'weapons' ? '240px' : ''}
-                  color={data.includes(item) === true ? colorBtn : ''}
+                  color={heroArray.find((el) => el.item == item) ? colorBtn : ''}
                   key={item}
                   title={item}
                   img={`../images/${id}/${item}${img}`}
-                  imgBtn={data.includes(item) === true ? imgBtn : ''}
-                  btnText={data.includes(item) === true ? added : selected}
+                  imgBtn={heroArray.find((el) => el.item == item) ? imgBtn : ''}
+                  btnText={heroArray.find((el) => el.item == item) ? added : selected}
                   addHero={(): void => addHero(item, i)} />))}
           </Container>
         </>

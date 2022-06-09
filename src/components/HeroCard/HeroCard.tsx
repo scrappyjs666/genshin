@@ -14,9 +14,10 @@ interface card {
   category?: string | undefined;
   addHero?: Function;
   findIndex?: Function;
+  deleteItem?: Function;
 }
 
-const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, color, id, minHeight,category, addHero, findIndex }) => {
+const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, color, id, minHeight,category, addHero, findIndex, deleteItem }) => {
   return(
     <Link to={`/HeroPage/${category}/${id}`} target="_blank">
       <>
@@ -35,6 +36,7 @@ const  HeroCard: React.FC<card> = ({  title, img, btnText, imgBtn, color, id, mi
               e.preventDefault(); 
               addHero?.() 
               findIndex?.()
+              deleteItem?.()
             } 
             }
             className={styles.hero__add}>

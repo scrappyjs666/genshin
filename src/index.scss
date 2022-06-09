@@ -61,9 +61,34 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
     -o-border-radius: 4px;
 }
 
+
 .swiper {
-  width: 550px !important;
+  margin-bottom: 15px;
 }
+
+.swiper-slide-shadow {
+  background: none !important;
+}
+
 .swiper-slide {
-  width: 550px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+}
+
+.swiper-button-next {
+    &:after {
+  display: none;
+}
+}
+
+.swiper-button-prev {
+    &:after {
+  display: none;
+}
 }
