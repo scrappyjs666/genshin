@@ -25,8 +25,7 @@ const  HomePage:React.FC = () => {
           <Link to={`/HeroPageList/${el.link}`}>
             <HeroPageCard
               key={el.name}
-              img={el.name!}
-            />
+              img={el.name!} />
           </Link>
         )}
       </div>

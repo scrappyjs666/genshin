@@ -92,3 +92,108 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
   display: none;
 }
 }
+
+  /* Generic click behavior */
+  [data-dis-type="self-contained"] {
+    cursor: pointer;
+    border-radius: 15px;
+  }
+  [data-dis-container] {
+    animation: slideLeft500 0.5s ease-in paused;
+  }
+  [data-dis-type] {
+    animation: slideRight500 0.5s ease-in paused;
+  }
+  @keyframes slideLeft500 {
+    100% { transform: translateX(-500px); }
+  }
+  @keyframes slideRight500 {
+    100% { transform: translateX(500px); }
+  }
+  /* Start the animation we add a class */
+  .animate,
+  .animate [data-dis-type] {
+    /* Start the animation */
+    animation-play-state: running !important;
+    /* Make sure it doesn't show until we want it to */
+    animation-fill-mode: forwards !important;
+  }
+
+  /* Specific click effects */
+  .grid-item:nth-of-type(1) [data-dis-container] {
+    animation: slideUpLeft 0.5s ease-in paused;
+  }
+  .grid-item:nth-of-type(1) [data-dis-type] {
+    animation: slideDownRight 0.5s ease-in paused;
+    border-radius: 9999px;
+  }
+  @keyframes slideUpLeft {
+    100% { transform: translate(-135px, -50px); }
+  }
+  @keyframes slideDownRight {
+    100% { transform: translate(135px, 50px); }
+  }
+  .grid-item:nth-of-type(2) [data-dis-container] {
+    animation: slideRight500 0.8s ease-in paused;
+  }
+  .grid-item:nth-of-type(2) [data-dis-type] {
+    width: 400px;
+    height: 75px;
+    animation: slideRight650 0.8s ease-in paused;
+  }
+  @keyframes slideRight650 {
+    100% { transform: translateX(650px); }
+  }
+  .grid-item:nth-of-type(3) [data-dis-container] {
+    animation: bounce 1s ease-in-out paused;
+  }
+  .grid-item:nth-of-type(3) [data-dis-type] {
+    animation: counterBounce 1s ease-in-out paused;
+  }
+  @keyframes bounce {
+    20% { transform: translateY(-50px); }
+    100% { transform: translateY(500px); }
+  }
+  @keyframes counterBounce {
+    30% { transform: translateY(0); }
+    100% { transform: translateY(200px); }
+  }
+  .grid-item:nth-of-type(4) [data-dis-container] {
+    animation: slideRight500 1s ease-in-out paused;
+  }
+  .grid-item:nth-of-type(4) [data-dis-type] {
+    height: 135px;
+    border-radius: 35px;
+    animation: slideLeft500 1s ease-in-out paused;
+  }
+  
+  .grid-item:nth-of-type(5) [data-dis-container] {
+    animation: becomeNothing 0.1s ease-in paused;
+  }
+  .grid-item:nth-of-type(5) [data-dis-type] {
+    height: 135px;
+    background: transparent;
+    border: 2px solid #5aa9eb;
+    animation: slideUpLeft68 0.1s ease-in paused;
+  }
+  @keyframes becomeNothing {
+    0% { width: 135px; height: 135px; }
+    100% { width: 0; height: 0; }
+  }
+  @keyframes slideUpLeft68 {
+    100% { transform: translate(-67.5px, -67.5px); }
+  }
+  .grid-item:nth-of-type(6) [data-dis-container] {
+    animation: squashHorizontalSides 0.3s ease-in paused;
+  }
+  .grid-item:nth-of-type(6) [data-dis-type] {
+    animation: slideLeft68 0.3s ease-in paused;
+  }
+  @keyframes squashHorizontalSides {
+    0% { width: 135px; transform: translateX(0); }
+    100% { width: 0; transform: translateX(-0px); }
+  }
+  @keyframes slideLeft68 {
+    100% { transform: translateX(-67.5px); }
+  }
+  
