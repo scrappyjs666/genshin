@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import heroList from './heroListSlice'
+import inputSlice from './inputSlice'
 
 
 export const store = configureStore({
   reducer: {
-    heroList
+    heroList,
+    inputSlice
   },
 })
 

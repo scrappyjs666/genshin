@@ -1,13 +1,18 @@
 import styles from './Search.module.scss';
 import React from 'react';  
 import search from './img/search.svg'
+import { useAppDispatch } from '../../../Store/hooks/hooks';
+import { inputChangeValue } from '../../../Store/inputSlice';
+import { useState } from 'react';
 
-type Props = { children: React.ReactNode };
 
-const  Search: React.FC<Props> = ({ children }) => {
+const  Search: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   return(
     <div className={styles.search__wrapp}>
       <input
+        onChange={(event) => dispatch(inputChangeValue(event.target.value))}
         placeholder='Find your favorite character'
         className={styles.search}>
       </input>
@@ -17,7 +22,6 @@ const  Search: React.FC<Props> = ({ children }) => {
           src={search} 
           alt='search icon'/>
       </button>
-      {children}
     </div>
   )
 }

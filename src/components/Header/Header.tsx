@@ -14,7 +14,7 @@ const  Header: React.FC<Props> = ({ children }) => {
           <Link to='/'>
             <Logo/>
           </Link>
-          <Search children={undefined}/>
+          <Search />
           {children}
         </header>
       </div>

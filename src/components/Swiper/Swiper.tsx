@@ -15,7 +15,6 @@ const SwiperBakset: React.FC = () => {
   const colorBtn = useAppSelector((state) => state.heroList.colorBtn);
   const dispatch = useAppDispatch();
   const heroes = useAppSelector((state) => state.heroList.items);
-  console.log(heroes)
 
   interface Item {
     id: string,
