@@ -24,10 +24,10 @@
   -o-border-radius: 15px;
   font-size: 20px;
   background: #74ebd5;
-  background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5); 
-  background: linear-gradient(to right, #ACB6E5, #74ebd5);
+  background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5);
+  background: linear-gradient(to right, #acb6e5, #74ebd5);
   color: #fff;
-  text-shadow: 0  0 10px #fff232;
+  text-shadow: 0 0 10px #fff232;
   cursor: pointer;
 }
 
@@ -42,6 +42,6 @@
 .NotFoundPage__text {
   font-size: 40px;
   letter-spacing: 1px;
-  text-shadow: 0  0 10px #fff232;
+  text-shadow: 0 0 10px #fff232;
   margin-bottom: 10px;
 }

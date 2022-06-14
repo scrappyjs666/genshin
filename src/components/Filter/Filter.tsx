@@ -1,25 +1,21 @@
-import styles from './Filter.module.scss';
-import React from 'react';
-import FilterBtn from './FilterBtn';
+import styles from './Filter.module.scss'
+import React from 'react'
+import FilterBtn from './FilterBtn'
 
 interface IFilter {
-  sortAZ: Function,
-  sortZA: Function,
+  sortAZ: Function
+  sortZA: Function
 }
 
-const  Filter: React.FC<IFilter> = ( {sortAZ, sortZA} ) => {
-  return(
+const Filter: React.FC<IFilter> = ({ sortAZ, sortZA }) => {
+  return (
     <>
       <div className={styles.filter}>
-        <FilterBtn 
-          fn={():void => sortAZ()}
-          name={'name A-Z'} />
-        <FilterBtn 
-          fn={():void => sortZA()}
-          name={'name Z-A'} />
+        <FilterBtn fn={(): void => sortAZ()} name={'name A-Z'} />
+        <FilterBtn fn={(): void => sortZA()} name={'name Z-A'} />
       </div>
     </>
   )
 }
 
-export default Filter;
+export default Filter

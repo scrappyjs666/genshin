@@ -1,11 +1,11 @@
-import styles from './BasketPage.module.scss';
-import React from 'react';
-import SwiperBakset from '../../components/Swiper/Swiper';
+import styles from './BasketPage.module.scss'
+import React from 'react'
+import SwiperBakset from '../../components/Swiper/Swiper'
 
-const  BasketPage:React.FC = () => {
-  return(
+const BasketPage: React.FC = () => {
+  return (
     <>
-      <SwiperBakset/>
+      <SwiperBakset />
       {/* <div className={styles.BasketPage__wrapper}>
         <div 
           className={styles.BasketPage__goods}>
@@ -19,4 +19,4 @@ const  BasketPage:React.FC = () => {
   )
 }
 
-export default BasketPage;
+export default BasketPage

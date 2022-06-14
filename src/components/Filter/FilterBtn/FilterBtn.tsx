@@ -1,24 +1,21 @@
-import styles from './FilterBtn.module.scss';
-import React, { MouseEventHandler } from 'react';
-import { IoIosFunnel } from 'react-icons/io';
+import styles from './FilterBtn.module.scss'
+import React, { MouseEventHandler } from 'react'
+import { IoIosFunnel } from 'react-icons/io'
 
 interface IFilterBtn {
-  name:string,
-  fn:MouseEventHandler<HTMLButtonElement> | undefined,
+  name: string
+  fn: MouseEventHandler<HTMLButtonElement> | undefined
 }
 
-const  FilterBtn: React.FC<IFilterBtn> = ({ name,fn,  }) => {
-  return(
+const FilterBtn: React.FC<IFilterBtn> = ({ name, fn }) => {
+  return (
     <>
-      <button 
-        onClick={fn}
-        className={styles.filterBtn} 
-        type='button'>
-        <IoIosFunnel/>
+      <button onClick={fn} className={styles.filterBtn} type="button">
+        <IoIosFunnel />
         {name}
       </button>
     </>
   )
 }
 
-export default FilterBtn;
+export default FilterBtn

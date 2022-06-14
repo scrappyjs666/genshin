@@ -1,17 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { act } from 'react-dom/test-utils';
-import { ObjectType } from 'typescript';
+import { act } from 'react-dom/test-utils'
+import { ObjectType } from 'typescript'
 import type { RootState } from './store'
 
-
 interface Input {
-  inputValue: string | undefined;
+  inputValue: string | undefined
 }
 
-const initialState:Input = {
-  inputValue : '',
+const initialState: Input = {
+  inputValue: '',
 }
-
 
 export const inputSlice = createSlice({
   name: 'inputValue',
@@ -21,7 +19,8 @@ export const inputSlice = createSlice({
       state.inputValue = action.payload
       console.log(state.inputValue)
     },
-  }})
+  },
+})
 
 export const { inputChangeValue } = inputSlice.actions
 

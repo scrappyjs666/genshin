@@ -40,7 +40,7 @@
   cursor: pointer;
 }
 
-.heroCard__title  {
+.heroCard__title {
   display: inline-block;
   text-decoration: none;
 }
@@ -51,11 +51,11 @@
   width: 0;
   height: 2px;
   background: rgb(251, 251, 251);
-  transition: width .4s;
-  -webkit-transition: width .4s;
-  -moz-transition: width .4s;
-  -ms-transition: width .4s;
-  -o-transition: width .4s;
+  transition: width 0.4s;
+  -webkit-transition: width 0.4s;
+  -moz-transition: width 0.4s;
+  -ms-transition: width 0.4s;
+  -o-transition: width 0.4s;
 }
 
 .heroCard__title:hover::after {
@@ -89,7 +89,6 @@
   border: none;
   // background-color:#f23
 }
-
 
 .btn__image {
   position: absolute;
