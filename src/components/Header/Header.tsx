@@ -1,10 +1,13 @@
-import styles from './Header.module.scss'
 import React from 'react'
+import { Link } from 'react-router-dom'
+import styles from './Header.module.scss'
 import Logo from './Logo'
 import Search from './Search'
-import { Link } from 'react-router-dom'
+import Sound from './Sound/Sound';
 
-type Props = { children: React.ReactNode }
+interface Props {
+  children: React.ReactNode
+}
 
 const Header: React.FC<Props> = ({ children }) => {
   return (
@@ -15,6 +18,7 @@ const Header: React.FC<Props> = ({ children }) => {
             <Logo />
           </Link>
           <Search />
+          <Sound />
           {children}
         </header>
       </div>

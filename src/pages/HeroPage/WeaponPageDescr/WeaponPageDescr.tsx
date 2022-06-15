@@ -30,7 +30,9 @@ const WeaponPageDescr: React.FC<IWeaponPageDescr> = ({
     <>
       <div className={styles.WeaponPageDescr}>
         <div className={ascensionMaterial}>
-          <div className={styles.ascensionMaterial}>AscensionMaterial: {ascensionMaterial}</div>
+          <div className={styles.ascensionMaterial}>
+            AscensionMaterial: {ascensionMaterial}
+          </div>
           <div className={styles.baseAttack}>BaseAttack: {baseAttack}</div>
           <div className={styles.location}>Location: {location}</div>
           <div className={styles.name}>Name: {name}</div>

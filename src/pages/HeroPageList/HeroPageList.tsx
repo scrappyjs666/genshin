@@ -1,43 +1,34 @@
-import React from 'react'
-import { getApiResource } from '../../api/network'
-import { useState, useEffect } from 'react'
-import HeroCard from '../../components/HeroCard'
-import imgBtn from './img/star.svg'
-import Container from '../../components/Container'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
+import { getApiResource } from '../../api/network'
+import Container from '../../components/Container'
 import Filter from '../../components/Filter'
-import styles from './HeroPageList.module.scss'
-import debounce from 'lodash.debounce'
-import { addItem } from '../../Store/heroListSlice'
+import HeroCard from '../../components/HeroCard'
 import Loader from '../../components/UI/Loader'
+import { addItem } from '../../Store/heroListSlice'
+import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
+import styles from './HeroPageList.module.scss'
+import imgBtnAdd from './img/add.svg'
+import imgBtn from './img/star.svg'
 
 const HeroPageList: React.FC = () => {
   const [data, setData] = useState<string[]>([])
+  const [initialData, setInitialData] = useState<string[]>([])
   const [arrayLenght, setArrayLenght] = useState(10)
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useAppDispatch()
-  // const testDebounce = (() => {
-  //   console.log('Hello')
-  // }, 250)
 
-  // if (localStorage.getItem('items')) {
-  //   const item = JSON.parse(localStorage.getItem('items')!);
-  //   console.log(item)
-  // }
-  const colorBtn = useAppSelector((state) => state.heroList.colorBtn)
+  const backColor = useAppSelector((state) => state.heroList.backColor)
   let heroArray = useAppSelector((state) => state.heroList.items)
-  let inputVal = useAppSelector((state) => state.inputSlice.inputValue)
-  console.log(inputVal, 'inp')
+  const inputVal = useAppSelector((state) => state.inputSlice.inputValue)
   if (localStorage.getItem('items')) {
     heroArray = JSON.parse(localStorage.getItem('items')!)
-    console.log(heroArray, '23132')
   }
 
   const { id } = useParams()
   const url = `https://api.genshin.dev/${id}`
 
-  const addHero = (item: string, index: number): void => {
+  const addHero = (item: string) => {
     const elements = {
       id,
       item,
@@ -50,6 +41,7 @@ const HeroPageList: React.FC = () => {
     window.scrollTo(0, 0)
     getApiResource(url).then((data) => {
       setData(data)
+      setInitialData(data)
       setTimeout(() => {
         setIsLoading(false)
       }, 1500)
@@ -63,12 +55,23 @@ const HeroPageList: React.FC = () => {
     }
   })
 
-  const sortAZ = (): void => {
+  const sortAZ = () => {
     setData([...data].sort())
   }
 
-  const sortZA = (): void => {
+  const sortZA = () => {
     setData([...data].reverse())
+  }
+
+  const favoriteHero = () => {
+    const result = heroArray
+      .filter((el: { id: string }) => el.id === id)
+      .map((el) => el.item)
+    setData(result)
+  }
+
+  const allHero = () => {
+    setData(initialData)
   }
 
   const scrollHandler = (): void => {
@@ -122,24 +125,41 @@ const HeroPageList: React.FC = () => {
       ) : (
         <>
           <div className={styles.HeroPage__filter}>
-            <Filter sortAZ={sortAZ} sortZA={sortZA} />
+            <Filter
+              sortAZ={sortAZ}
+              sortZA={sortZA}
+              favorite={favoriteHero}
+              allHero={allHero}
+            />
           </div>
           <Container>
             {data
-              .filter((val) => !excludedData.includes(val))
+              .filter(
+                (val) =>
+                  !excludedData.includes(val) &&
+                  val.toLowerCase().includes(inputVal.toLowerCase())
+              )
               .slice(0, arrayLenght)
-              .map((item, i) => (
+              .map((item) => (
                 <HeroCard
+                  key={item}
                   category={id}
                   id={item}
-                  minHeight={id == 'weapons' ? '240px' : ''}
-                  color={heroArray.find((el) => el.item == item) ? colorBtn : ''}
-                  key={item}
+                  minHeight={id === 'weapons' ? '240px' : ''}
+                  backColor={
+                    heroArray.find((el) => el.item === item) ? backColor : ''
+                  }
                   title={item}
                   img={`../images/${id}/${item}${img}`}
-                  imgBtn={heroArray.find((el) => el.item == item) ? imgBtn : ''}
-                  btnText={heroArray.find((el) => el.item == item) ? added : selected}
-                  addHero={(): void => addHero(item, i)}
+                  imgBtn={
+                    heroArray.find((el) => el.item === item)
+                      ? imgBtn
+                      : imgBtnAdd
+                  }
+                  btnText={
+                    heroArray.find((el) => el.item === item) ? added : selected
+                  }
+                  addHero={(): void => addHero(item)}
                 />
               ))}
           </Container>

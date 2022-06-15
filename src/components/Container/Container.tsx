@@ -1,7 +1,9 @@
-import styles from './Container.module.scss'
 import React from 'react'
+import styles from './Container.module.scss'
 
-type Props = { children: React.ReactNode }
+interface Props {
+  children: React.ReactNode
+}
 
 const Container: React.FC<Props> = ({ children }) => {
   return (

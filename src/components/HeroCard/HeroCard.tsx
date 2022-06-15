@@ -1,14 +1,14 @@
-import styles from './HeroCard.module.scss'
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import styles from './HeroCard.module.scss'
 
-interface card {
+interface ICard {
   img: string
   title?: string
   btnText?: string
-  imgBtn?: string
+  imgBtn?: any
   styleBack?: string | number
-  color?: string
+  backColor?: string
   id?: string
   minHeight?: string
   category?: string | undefined
@@ -17,12 +17,12 @@ interface card {
   deleteItem?: Function
 }
 
-const HeroCard: React.FC<card> = ({
+const HeroCard: React.FC<ICard> = ({
   title,
   img,
   btnText,
   imgBtn,
-  color,
+  backColor,
   id,
   minHeight,
   category,
@@ -33,11 +33,14 @@ const HeroCard: React.FC<card> = ({
   return (
     <Link to={`/HeroPage/${category}/${id}`} target="_blank">
       <>
-        <div style={{ height: `${minHeight}` }} className={styles.heroCard__container}>
+        <div
+          style={{ height: `${minHeight}` }}
+          className={styles.heroCard__container}
+        >
           <h2 className={styles.heroCard__title}>{title}</h2>
-          <img className={styles.heroCard__img} src={img} />
+          <img className={styles.heroCard__img} src={img} alt="heroCard__img" />
           <button
-            style={{ backgroundColor: `${color}` }}
+            style={{ background: `${backColor}` }}
             onClick={(e): void => {
               e.preventDefault()
               addHero?.()
@@ -46,7 +49,7 @@ const HeroCard: React.FC<card> = ({
             }}
             className={styles.hero__add}
           >
-            <img src={imgBtn} />
+            <img src={imgBtn} alt="img btn" />
             {btnText}
           </button>
         </div>

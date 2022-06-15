@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { act } from 'react-dom/test-utils'
-import { ObjectType } from 'typescript'
+import { stat } from 'fs'
 import type { RootState } from './store'
 
 interface Input {
-  inputValue: string | undefined
+  inputValue: string
 }
 
 const initialState: Input = {
@@ -19,10 +18,13 @@ export const inputSlice = createSlice({
       state.inputValue = action.payload
       console.log(state.inputValue)
     },
+    removeInputField: (state) => {
+      state.inputValue = ''
+    },
   },
 })
 
-export const { inputChangeValue } = inputSlice.actions
+export const { inputChangeValue, removeInputField } = inputSlice.actions
 
 export const selectCount = (state: RootState) => state.inputSlice.inputValue
 

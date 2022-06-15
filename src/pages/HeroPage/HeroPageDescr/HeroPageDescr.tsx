@@ -33,7 +33,9 @@ const HeroPageDescr: React.FC<IHeroPageDescr> = ({
       <div className={styles.descr}>
         <div className={styles.affiliation}>Affiliation: {affiliation}</div>
         <div className={styles.birthday}>Birthday: {birthday}</div>
-        <div className={styles.constellation}>Constellation: {constellation}</div>
+        <div className={styles.constellation}>
+          Constellation: {constellation}
+        </div>
         <div className={styles.description}>Description: {description}</div>
         <div className={styles.nation}>Nation: {nation}</div>
         <div className={styles.rarity}>

@@ -1,37 +1,17 @@
-module.exports = {
-  extends: [
-    'airbnb-typescript',
-    'airbnb/hooks',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jest/recommended',
-    'plugin:prettier/recommended'
+/* eslint-disable prettier/prettier */
+const { configure, presets } = require('eslint-kit')
+
+module.exports = configure({
+  root: __dirname,
+  presets: [
+    presets.imports(),
+    presets.node(),
+    presets.prettier(),
+    presets.typescript(),
+    presets.react({
+      version: 'detect',
+      newJSXTransform: true
+    }),
+    presets.imports()
   ],
-  plugins: ['react', '@typescript-eslint', 'jest'],
-  env: {
-    browser: true,
-    es6: true,
-    jest: true,
-  },
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    project: './tsconfig.json',
-  },
-  rules: {
-    'linebreak-style': 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
-  },
-};
+})

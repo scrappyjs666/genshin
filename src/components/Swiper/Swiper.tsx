@@ -1,18 +1,17 @@
-// import Swiper core and required modules
-import { EffectCards, Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import HeroCard from '../HeroCard'
-import React from 'react'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import styles from './Swiper.module.scss'
-import { useAppSelector, useAppDispatch } from '../../Store/hooks/hooks'
-import imgBtn from './img/star.svg'
-import { removeItem } from '../../Store/heroListSlice'
 import 'swiper/css/effect-cards'
+import React from 'react'
+import { EffectCards, Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { removeItem } from '../../Store/heroListSlice'
+import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
+import HeroCard from '../HeroCard'
+import imgBtn from './img/star.svg'
+import styles from './Swiper.module.scss'
 
 const SwiperBakset: React.FC = () => {
-  const colorBtn = useAppSelector((state) => state.heroList.colorBtn)
+  const colorBtn = useAppSelector((state) => state.heroList.backColor)
   const dispatch = useAppDispatch()
   const heroes = useAppSelector((state) => state.heroList.items)
 
@@ -28,21 +27,20 @@ const SwiperBakset: React.FC = () => {
       <div className={styles.Swiper__title}>Your favorites Heroes</div>
       <Swiper
         modules={[EffectCards]}
-        effect={'cards'}
+        effect="cards"
         grabCursor={true}
         className="mySwiper"
         style={{ width: '330px', height: '554px' }}
       >
         {heroes
           .filter((el: { id: string }) => el.id === 'characters')
-          .map((el: Item, i: number) => (
-            <SwiperSlide>
+          .map((el: Item) => (
+            <SwiperSlide key={el.item}>
               <HeroCard
                 category={el.id}
                 id={el.item}
-                key={el.item}
                 title={el.item}
-                color={colorBtn}
+                backColor={colorBtn}
                 btnText={added}
                 imgBtn={imgBtn}
                 deleteItem={() => dispatch(removeItem(el.item))}
@@ -55,20 +53,19 @@ const SwiperBakset: React.FC = () => {
       <Swiper
         style={{ width: '276px', height: '286px' }}
         modules={[EffectCards]}
-        effect={'cards'}
+        effect="cards"
         grabCursor={true}
         className="mySwiper"
       >
         {heroes
           .filter((el: { id: string }) => el.id === 'enemies')
           .map((el: Item) => (
-            <SwiperSlide>
+            <SwiperSlide key={el.item}>
               <HeroCard
                 category={el.id}
                 id={el.item}
-                key={el.item}
                 btnText={added}
-                color={colorBtn}
+                backColor={colorBtn}
                 title={el.item}
                 imgBtn={imgBtn}
                 deleteItem={() => dispatch(removeItem(el.item))}
@@ -81,20 +78,19 @@ const SwiperBakset: React.FC = () => {
       <Swiper
         style={{ width: '286px', height: 'auto' }}
         modules={[EffectCards]}
-        effect={'cards'}
+        effect="cards"
         grabCursor={true}
         className="mySwiper"
       >
         {heroes
           .filter((el: { id: string }) => el.id === 'weapons')
           .map((el: Item) => (
-            <SwiperSlide>
+            <SwiperSlide key={el.item}>
               <HeroCard
                 category={el.id}
                 id={el.item}
-                key={el.item}
                 btnText={added}
-                color={colorBtn}
+                backColor={colorBtn}
                 title={el.item}
                 imgBtn={imgBtn}
                 deleteItem={() => dispatch(removeItem(el.item))}

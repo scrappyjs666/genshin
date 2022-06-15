@@ -37,7 +37,9 @@ const HeroPage: React.FC = () => {
 
   const img =
     urlCategory === 'characters'
-      ? `/images/characters/${String(HeroInfo?.name.toLowerCase().replace(/ /g, '-'))}/gacha-card`
+      ? `/images/characters/${String(
+          HeroInfo?.name.toLowerCase().replace(/ /g, '-')
+        )}/gacha-card`
       : `/images/${urlCategory}/${urlParams[3]}/icon`
 
   return (
@@ -59,7 +61,9 @@ const HeroPage: React.FC = () => {
               vision={HeroInfo?.vision}
               weapon={HeroInfo?.weapon}
               weapon_type={HeroInfo?.weapon_type}
-              visionImg={`/images/elements/${String(HeroInfo?.vision.toLowerCase())}/icon`}
+              visionImg={`/images/elements/${String(
+                HeroInfo?.vision.toLowerCase()
+              )}/icon`}
             />
           ) : null}
           {urlCategory === 'enemies' ? (

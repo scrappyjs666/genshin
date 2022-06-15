@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { act } from 'react-dom/test-utils'
-import { ObjectType } from 'typescript'
 import type { RootState } from './store'
 
 type Hero = {
@@ -10,22 +8,16 @@ type Hero = {
 
 interface HeroList {
   items: Hero[]
-  colorBtn: string
+  backColor: string
   item: string
-  elements: {
-    id: string | undefined
-    item: string
-  }
 }
 
 const initialState: HeroList = {
-  items: JSON.parse(localStorage.getItem('items')!),
-  colorBtn: '#f23',
+  items: JSON.parse(localStorage.getItem('items')!)
+    ? JSON.parse(localStorage.getItem('items')!)
+    : [{ id: '', item: '' }],
+  backColor: 'linear-gradient(to right, #ff4b2b, #ff416c)',
   item: '',
-  elements: {
-    id: '',
-    item: '',
-  },
 }
 
 export const heroListSlice = createSlice({
@@ -34,7 +26,9 @@ export const heroListSlice = createSlice({
   reducers: {
     addItem: (state, action: PayloadAction<Hero>) => {
       if (state.items.find((el) => el.item === action.payload.item)) {
-        state.items = state.items.filter((el) => el.item !== action.payload.item)
+        state.items = state.items.filter(
+          (el) => el.item !== action.payload.item
+        )
         localStorage.setItem('items', JSON.stringify(state.items))
         return
       }

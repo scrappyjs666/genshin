@@ -1,6 +1,6 @@
-import styles from './Basket.module.scss'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import styles from './Basket.module.scss'
 
 const Basket: React.FC = () => {
   return (
