@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { stat } from 'fs'
 import type { RootState } from './store'
 
 interface Input {
@@ -16,7 +15,6 @@ export const inputSlice = createSlice({
   reducers: {
     inputChangeValue: (state, action: PayloadAction<string>) => {
       state.inputValue = action.payload
-      console.log(state.inputValue)
     },
     removeInputField: (state) => {
       state.inputValue = ''

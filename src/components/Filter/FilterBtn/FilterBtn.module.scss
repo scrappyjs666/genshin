@@ -19,6 +19,9 @@
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   &:hover {
-    background-color: #f23456;
+    color: #000;
+    background: #c6ffdd;
+    background: -webkit-linear-gradient(to right, #f7797d, #fbd786, #c6ffdd);
+    background: linear-gradient(to right, #f7797d, #fbd786, #c6ffdd);
   }
 }

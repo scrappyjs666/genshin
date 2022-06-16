@@ -1,5 +1,6 @@
+import AddHero from 'components/AddHero/AddHero'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { getApiResource } from '../../api/network'
 import Container from '../../components/Container'
 import Filter from '../../components/Filter'
@@ -7,15 +8,18 @@ import HeroCard from '../../components/HeroCard'
 import Loader from '../../components/UI/Loader'
 import { addItem } from '../../Store/heroListSlice'
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
+import { excludedData } from './excludedData'
 import styles from './HeroPageList.module.scss'
 import imgBtnAdd from './img/add.svg'
 import imgBtn from './img/star.svg'
+import { inputChangeValue } from 'Store/inputSlice'
 
 const HeroPageList: React.FC = () => {
   const [data, setData] = useState<string[]>([])
   const [initialData, setInitialData] = useState<string[]>([])
   const [arrayLenght, setArrayLenght] = useState(10)
   const [isLoading, setIsLoading] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useAppDispatch()
 
   const backColor = useAppSelector((state) => state.heroList.backColor)
@@ -46,7 +50,22 @@ const HeroPageList: React.FC = () => {
         setIsLoading(false)
       }, 1500)
     })
-  }, [])
+  }, [url])
+
+  useEffect(() => {
+    setSearchParams({ hero: inputVal })
+    if (inputVal.length === 0) {
+      setSearchParams('')
+    }
+  }, [inputVal, searchParams, setSearchParams])
+
+  useEffect(() => {
+    const heroQuery = searchParams.get('hero') || ''
+    if (heroQuery.length > 1) {
+      setSearchParams({ hero: heroQuery })
+      dispatch(inputChangeValue(heroQuery))
+    }
+  }, [searchParams, setSearchParams])
 
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler)
@@ -86,40 +105,13 @@ const HeroPageList: React.FC = () => {
     }
   }
 
-  const excludedData = [
-    'defense-mechanism',
-    'thoma',
-    'traveler-geo',
-    'traveler-electro',
-    'traveler-anemo',
-    'raiden',
-    'ayaka',
-    'sara',
-    'kokomi',
-    'kazuha',
-    'akuoumaru',
-    'calamity-queller',
-    'cinnabar -spindle',
-    'eberlasting-moonglow',
-    'haran-geppaku-futsu',
-    "kagura's-verity",
-    "mouun's-moon",
-    'oathsworn-eye',
-    'polar-star',
-    'prototype-archaic',
-    'predator',
-    'redhorn-stonethresher',
-    'royal-spear',
-    "wavebreaker's-fin",
-    'alley-hunter',
-  ]
-
   const added = 'added to favorites'
   const selected = `choose your favorite ${id}`
   const img = id !== 'characters' ? '/icon' : '/gacha-card'
 
   return (
     <>
+      {data.length === 0 && !isLoading && <AddHero />}
       {isLoading ? (
         <Loader />
       ) : (

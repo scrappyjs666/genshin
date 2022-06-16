@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styles from './Header.module.scss'
 import Logo from './Logo'
 import Search from './Search'
-import Sound from './Sound/Sound';
+import Sound from './Sound/Sound'
 
 interface Props {
   children: React.ReactNode

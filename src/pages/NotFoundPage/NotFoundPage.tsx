@@ -4,7 +4,7 @@ import styles from './NotFoundPage.module.scss'
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate()
-  const goBack = (): void => navigate(-1)
+  const goBack = () => navigate(-1)
   return (
     <>
       <div className={styles.NotFoundPage__wrapper}>
@@ -12,7 +12,7 @@ const NotFoundPage: React.FC = () => {
           404 ERROR Page Not Found
         </div>
         <button
-          onClick={(): void => goBack()}
+          onClick={() => goBack()}
           className={styles.NotFoundPage__buttonBack}
         >
           go back
