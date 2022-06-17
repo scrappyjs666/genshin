@@ -14,20 +14,23 @@ const Sound: React.FC = () => {
 
   const MusicPlay = () => {
     if (audioRef.current) {
-      sound === false? audioRef.current.play() : audioRef.current.pause()
+      sound === false ? audioRef.current.play() : audioRef.current.pause()
     }
   }
 
   return (
     <>
       <button
-        onClick= {() => {soundToggle(); MusicPlay()}}
+        onClick={() => {
+          soundToggle()
+          MusicPlay()
+        }}
         className={styles.Sound}
       >
         {sound ? <IoVolumeMedium /> : <IoVolumeMute />}
       </button>
-      <audio ref={audioRef} loop={true} controls style={{display:'none' }}>
-        <source src={soundfile}  type="audio/mp3"/>
+      <audio ref={audioRef} loop={true} controls style={{ display: 'none' }}>
+        <source src={soundfile} type="audio/mp3" />
       </audio>
     </>
   )

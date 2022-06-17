@@ -1,7 +1,9 @@
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-cards'
+import AddHero from 'components/AddHero'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { EffectCards, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { removeItem } from '../../Store/heroListSlice'
@@ -19,86 +21,107 @@ const SwiperBakset: React.FC = () => {
     id: string
     item: string
   }
-
   const added = 'added to favorites'
+
+  const isHero = heroes.findIndex((el) => el.id === 'characters')
+  const isEnemies = heroes.findIndex((el) => el.id === 'enemies')
+  const isWeapons = heroes.findIndex((el) => el.id === 'weapons')
 
   return (
     <div className={styles.basket__wrapper}>
       <div className={styles.Swiper__title}>Your favorites Heroes</div>
-      <Swiper
-        modules={[EffectCards]}
-        effect="cards"
-        grabCursor={true}
-        className="mySwiper"
-        style={{ width: '330px', height: '554px' }}
-      >
-        {heroes
-          .filter((el: { id: string }) => el.id === 'characters')
-          .map((el: Item) => (
-            <SwiperSlide key={el.item}>
-              <HeroCard
-                category={el.id}
-                id={el.item}
-                title={el.item}
-                backColor={colorBtn}
-                btnText={added}
-                imgBtn={imgBtn}
-                deleteItem={() => dispatch(removeItem(el.item))}
-                img={`images/characters/${el.item}/gacha-card`}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      {isHero !== -1 ? (
+        <Swiper
+          modules={[EffectCards]}
+          effect="cards"
+          grabCursor={true}
+          className="mySwiper"
+          style={{ width: '330px', height: '554px' }}
+        >
+          {heroes
+            .filter((el: { id: string }) => el.id === 'characters')
+            .map((el: Item) => (
+              <SwiperSlide key={el.item}>
+                <HeroCard
+                  category={el.id}
+                  id={el.item}
+                  title={el.item}
+                  backColor={colorBtn}
+                  btnText={added}
+                  imgBtn={imgBtn}
+                  deleteItem={() => dispatch(removeItem(el.item))}
+                  img={`images/characters/${el.item}/gacha-card`}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      ) : (
+        <Link to="/HeroPageList/characters">
+          <AddHero text="You have not been added to favorites yet Characters" />
+        </Link>
+      )}
       <div className={styles.Swiper__title}>Your favorites Enemies</div>
-      <Swiper
-        style={{ width: '276px', height: '286px' }}
-        modules={[EffectCards]}
-        effect="cards"
-        grabCursor={true}
-        className="mySwiper"
-      >
-        {heroes
-          .filter((el: { id: string }) => el.id === 'enemies')
-          .map((el: Item) => (
-            <SwiperSlide key={el.item}>
-              <HeroCard
-                category={el.id}
-                id={el.item}
-                btnText={added}
-                backColor={colorBtn}
-                title={el.item}
-                imgBtn={imgBtn}
-                deleteItem={() => dispatch(removeItem(el.item))}
-                img={`images/enemies/${el.item}/icon`}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      {isEnemies !== -1 ? (
+        <Swiper
+          style={{ width: '276px', height: '286px' }}
+          modules={[EffectCards]}
+          effect="cards"
+          grabCursor={true}
+          className="mySwiper"
+        >
+          {heroes
+            .filter((el: { id: string }) => el.id === 'enemies')
+            .map((el: Item) => (
+              <SwiperSlide key={el.item}>
+                <HeroCard
+                  category={el.id}
+                  id={el.item}
+                  btnText={added}
+                  backColor={colorBtn}
+                  title={el.item}
+                  imgBtn={imgBtn}
+                  deleteItem={() => dispatch(removeItem(el.item))}
+                  img={`images/enemies/${el.item}/icon`}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      ) : (
+        <Link to="/HeroPageList/enemies">
+          <AddHero text="You have not been added to favorites yet enemies" />
+        </Link>
+      )}
       <div className={styles.Swiper__title}>Your favorites Weapons</div>
-      <Swiper
-        style={{ width: '286px', height: 'auto' }}
-        modules={[EffectCards]}
-        effect="cards"
-        grabCursor={true}
-        className="mySwiper"
-      >
-        {heroes
-          .filter((el: { id: string }) => el.id === 'weapons')
-          .map((el: Item) => (
-            <SwiperSlide key={el.item}>
-              <HeroCard
-                category={el.id}
-                id={el.item}
-                btnText={added}
-                backColor={colorBtn}
-                title={el.item}
-                imgBtn={imgBtn}
-                deleteItem={() => dispatch(removeItem(el.item))}
-                img={`images/weapons/${el.item}/icon`}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      {isWeapons !== -1 ? (
+        <Swiper
+          style={{ width: '286px', height: 'auto' }}
+          modules={[EffectCards]}
+          effect="cards"
+          grabCursor={true}
+          className="mySwiper"
+        >
+          {heroes
+            .filter((el: { id: string }) => el.id === 'weapons')
+            .map((el: Item) => (
+              <SwiperSlide key={el.item}>
+                <HeroCard
+                  category={el.id}
+                  id={el.item}
+                  btnText={added}
+                  backColor={colorBtn}
+                  title={el.item}
+                  imgBtn={imgBtn}
+                  deleteItem={() => dispatch(removeItem(el.item))}
+                  img={`images/weapons/${el.item}/icon`}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      ) : (
+        <Link to="/HeroPageList/weapons">
+          <AddHero text="You have not been added to favorites yet Weapons" />
+        </Link>
+      )}
     </div>
   )
 }

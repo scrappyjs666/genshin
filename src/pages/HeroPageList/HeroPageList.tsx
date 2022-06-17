@@ -1,6 +1,7 @@
-import AddHero from 'components/AddHero/AddHero'
+import AddHero from 'components/AddHero'
 import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
+import { inputChangeValue } from 'Store/inputSlice'
 import { getApiResource } from '../../api/network'
 import Container from '../../components/Container'
 import Filter from '../../components/Filter'
@@ -12,7 +13,6 @@ import { excludedData } from './excludedData'
 import styles from './HeroPageList.module.scss'
 import imgBtnAdd from './img/add.svg'
 import imgBtn from './img/star.svg'
-import { inputChangeValue } from 'Store/inputSlice'
 
 const HeroPageList: React.FC = () => {
   const [data, setData] = useState<string[]>([])
@@ -50,6 +50,7 @@ const HeroPageList: React.FC = () => {
         setIsLoading(false)
       }, 1500)
     })
+    dispatch(inputChangeValue(''))
   }, [url])
 
   useEffect(() => {
@@ -108,10 +109,10 @@ const HeroPageList: React.FC = () => {
   const added = 'added to favorites'
   const selected = `choose your favorite ${id}`
   const img = id !== 'characters' ? '/icon' : '/gacha-card'
+  const AddHeroFCText = "You haven't selected anything in this category yet'"
 
   return (
     <>
-      {data.length === 0 && !isLoading && <AddHero />}
       {isLoading ? (
         <Loader />
       ) : (
@@ -124,6 +125,7 @@ const HeroPageList: React.FC = () => {
               allHero={allHero}
             />
           </div>
+          {data.length === 0 && !isLoading && <AddHero text={AddHeroFCText} />}
           <Container>
             {data
               .filter(

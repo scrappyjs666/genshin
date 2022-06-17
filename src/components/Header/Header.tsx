@@ -5,11 +5,7 @@ import Logo from './Logo'
 import Search from './Search'
 import Sound from './Sound/Sound'
 
-interface Props {
-  children: React.ReactNode
-}
-
-const Header: React.FC<Props> = ({ children }) => {
+const Header: React.FC = () => {
   return (
     <>
       <div className={styles.header__wrap}>
@@ -19,7 +15,6 @@ const Header: React.FC<Props> = ({ children }) => {
           </Link>
           <Search />
           <Sound />
-          {children}
         </header>
       </div>
     </>

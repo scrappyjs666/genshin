@@ -45,6 +45,4 @@ export const heroListSlice = createSlice({
 
 export const { addItem, removeItem } = heroListSlice.actions
 
-export const selectCount = (state: RootState) => state.heroList.items
-
 export default heroListSlice.reducer

@@ -24,6 +24,4 @@ export const inputSlice = createSlice({
 
 export const { inputChangeValue, removeInputField } = inputSlice.actions
 
-export const selectCount = (state: RootState) => state.inputSlice.inputValue
-
 export default inputSlice.reducer

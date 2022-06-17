@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../Store/hooks/hooks'
 import { inputChangeValue, removeInputField } from '../../../Store/inputSlice'
 import closeIcon from './img/close-icon.svg'
@@ -7,14 +7,18 @@ import search from './img/search.svg'
 import styles from './Search.module.scss'
 
 const Search: React.FC = () => {
+  const [inputValue, setInputValue] = useState('')
   const dispatch = useAppDispatch()
-  const inputValue = useAppSelector((state) => state.inputSlice.inputValue)
   const changeInputValue = debounce(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       dispatch(inputChangeValue(e.target.value))
     },
     200
   )
+  const inputValueRedux = useAppSelector((state) => state.inputSlice.inputValue)
+  useEffect(() => {
+    setInputValue(inputValueRedux)
+  }, [inputValueRedux])
 
   return (
     <div className={styles.search__wrapp}>
@@ -22,6 +26,7 @@ const Search: React.FC = () => {
         value={inputValue}
         onChange={(e) => {
           changeInputValue(e)
+          setInputValue(e.target.value)
         }}
         placeholder="Find your favorite character"
         className={styles.search}
@@ -32,6 +37,7 @@ const Search: React.FC = () => {
       <button
         onClick={() => {
           dispatch(removeInputField())
+          setInputValue('')
         }}
         className={styles.clearInput}
       >
