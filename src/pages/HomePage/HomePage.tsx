@@ -17,8 +17,8 @@ const HomePage: React.FC = () => {
     <>
       <div className={styles.HomePage__Wrapper}>
         {arrInfo.map((el) => (
-          <Link to={`/HeroPageList/${el.link}`}>
-            <HeroPageCard key={el.name} img={el.name!} />
+          <Link key={el.name} to={`/HeroPageList/${el.link}`}>
+            <HeroPageCard img={el.name!} />
           </Link>
         ))}
       </div>

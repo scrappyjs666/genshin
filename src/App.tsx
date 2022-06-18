@@ -17,11 +17,11 @@ const App: React.FC = () => {
       <Basket />
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Login />} />
         <Route path="/HeroPageList/:id" element={<HeroPageList />} />
         <Route path="/HeroPage/:category/:id" element={<HeroPage />} />
         <Route path="BasketPage" element={<BasketPage />} />
-        <Route path="Login" element={<Login />} />
+        <Route path="HomePage" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
