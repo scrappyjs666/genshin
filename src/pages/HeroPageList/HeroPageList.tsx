@@ -48,7 +48,7 @@ const HeroPageList: React.FC = () => {
       setInitialData(data)
       setTimeout(() => {
         setIsLoading(false)
-      }, 1500)
+      }, 1000)
     })
     dispatch(inputChangeValue(''))
   }, [url])

@@ -1,21 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Account from './Account/Account'
 import styles from './Header.module.scss'
 import Logo from './Logo'
 import Navigate from './Navigate'
 import Search from './Search'
-import Sound from './Sound/Sound'
 
 const Header: React.FC = () => {
   return (
     <>
       <div className={styles.header__wrap}>
         <header className={styles.header}>
-          <Link to="/">
+          <Link to="/HomePage">
             <Logo />
           </Link>
           <Search />
-          <Sound />
+          <Account />
           <Navigate />
         </header>
       </div>

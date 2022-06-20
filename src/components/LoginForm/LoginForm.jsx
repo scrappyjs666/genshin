@@ -1,6 +1,16 @@
+import AutoRegistration from 'components/AutoRegistration'
 import EntireUserError from 'components/EntireUserError/EntireUserError'
 import SocialIcons from 'components/SocialIcons'
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import {
+  browserLocalPersistence,
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  setPersistence,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'Store/hooks/hooks'
@@ -10,10 +20,52 @@ import styles from './LoginForm.module.scss'
 const LoginForm = () => {
   const [isFlipped, setFlipped] = useState(false)
   const [password, setPassword] = useState('')
-  const [passwordRepeat, setPasswordRepeat] = useState('')
   const [email, setEmail] = useState('')
   const [loginError, setLoginError] = useState(false)
   const dispatch = useAppDispatch()
+  const [loginEmail, setLoginEmail] = useState('')
+  const [loginPassword, setLoginPassword] = useState('')
+  const provider = new GoogleAuthProvider()
+
+  useEffect(() => {
+    const getUser = () => {
+      const auth = getAuth()
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(
+            setUser({
+              email: user.email,
+              id: user.uid,
+              token: user.accessToken,
+            })
+          )
+        } else {
+          console.log(user, 'no user')
+        }
+      })
+    }
+    getUser()
+  }, [])
+
+  const loginGoogle = async () => {
+    const auth = getAuth()
+    await signInWithPopup(auth, provider)
+      .then(({ user }) => {
+        console.log(user, user.email)
+        const credential = GoogleAuthProvider.credentialFromResult(user)
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          })
+        )
+      })
+      .catch((error) => {
+        const credential = GoogleAuthProvider.credentialFromError(error)
+        console.log(error)
+      })
+  }
 
   const removeModal = () => {
     setLoginError(false)
@@ -24,11 +76,11 @@ const LoginForm = () => {
     return () => document.body.removeEventListener('click', removeModal)
   }, [])
 
-  const handleLogin = (email, password, name) => {
+  const signUp = async (loginEmail, loginPassword) => {
     const auth = getAuth()
-    createUserWithEmailAndPassword(auth, email, password, name)
-      .then((userCredential) => {
-        const user = userCredential.user
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      .then(({ user }) => {
+        console.log(user)
         dispatch(
           setUser({
             email: user.email,
@@ -36,11 +88,26 @@ const LoginForm = () => {
             token: user.accessToken,
           })
         )
-        console.log(user)
       })
       .catch((error) => {
         setLoginError(true)
       })
+  }
+
+  const createAcc = (email, password) => {
+    const auth = getAuth()
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        console.log(user)
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          })
+        )
+      })
+      .catch(() => alert('Invalid user!'))
   }
 
   const flippedToggle = () => {
@@ -50,7 +117,7 @@ const LoginForm = () => {
   const frontCard = () => {
     return (
       <form className={styles.LoginForm}>
-        <h2 className={styles.LoginForm__text}>Sign Up</h2>
+        <h2 className={styles.LoginForm__text}>Registration</h2>
         <input
           placeholder="Type your E-mail"
           className={styles.LoginForm__input}
@@ -65,21 +132,14 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input
-          placeholder="Repeat your Password"
-          className={styles.LoginForm__input}
-          type="password"
-          value={passwordRepeat}
-          onChange={(e) => setPasswordRepeat(e.target.value)}
-        />
         <button
           onClick={(e) => {
             e.preventDefault(e)
-            handleLogin(email, password, name)
+            createAcc(email, password)
           }}
           className={styles.LoginForm__submit}
         >
-          registration
+          create account
         </button>
         <button
           onClick={(e) => {
@@ -93,7 +153,7 @@ const LoginForm = () => {
         <Link to="HomePage">
           <button className={styles.LoginForm__skip}>Skip this</button>
         </Link>
-        <SocialIcons />
+        <AutoRegistration loginGoogle={loginGoogle} />
       </form>
     )
   }
@@ -106,16 +166,18 @@ const LoginForm = () => {
           placeholder="Your E-mail"
           className={styles.LoginForm__input}
           type="e-mail"
+          onChange={(e) => setLoginEmail(e.target.value)}
         />
         <input
           placeholder="Your Password"
           className={styles.LoginForm__input}
           type="password"
+          onChange={(e) => setLoginPassword(e.target.value)}
         />
         <button
           onClick={(e) => {
             e.preventDefault(e)
-            handleLogin(email, password, name)
+            signUp(loginEmail, loginPassword)
           }}
           className={styles.LoginForm__submit}
         >

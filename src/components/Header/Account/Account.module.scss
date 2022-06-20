@@ -1,0 +1,21 @@
+.Account__text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  text-shadow: 0px 0px 4px rgba(56, 169, 240, 0.75), 0px 0px 4px #fff;
+  cursor: pointer;
+}
+
+.Account__link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.Account__text::after {
+  margin-top: 5px;
+  content: url(./img/primogem.png);
+  margin-left: 5px;
+  align-self: center;
+}

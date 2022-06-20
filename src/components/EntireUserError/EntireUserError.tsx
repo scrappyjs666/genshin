@@ -1,6 +1,7 @@
 import cn from 'classnames'
 import { MouseEventHandler } from 'react'
 import styles from './EntireUserError.module.scss'
+import sadimage from './img/sad.png'
 
 interface IEntireUser {
   fn?: MouseEventHandler<HTMLButtonElement> | undefined
@@ -25,6 +26,7 @@ const EntireUserError: React.FC<IEntireUser> = ({
           onClick={(e) => e.stopPropagation()}
           className={styles.EntireUserError__container}
         >
+          <img src={sadimage} alt="sadimage" />
           <div className={styles.EntireUserError__text}>
             Unfortunately, we could not find such an account please try again
           </div>

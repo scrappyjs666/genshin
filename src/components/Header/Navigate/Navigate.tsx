@@ -1,6 +1,7 @@
 import BtnHeader from 'components/BtnHeader'
 import { Link } from 'react-router-dom'
 import styles from './Navigate.module.scss'
+import Sound from '../Sound'
 
 const Navigate = () => {
   return (
@@ -9,6 +10,7 @@ const Navigate = () => {
         <Link className={styles.Navigate__link} to="HomePage">
           <BtnHeader name="HomePage" fn={undefined} />
         </Link>
+        <Sound />
         <Link className={styles.Navigate__link} to="/">
           <BtnHeader name="LoginPage" fn={undefined} />
         </Link>
