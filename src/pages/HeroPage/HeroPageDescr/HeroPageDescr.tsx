@@ -1,5 +1,5 @@
-import styles from './HeroPageDescr.module.scss'
 import React from 'react'
+import styles from './HeroPageDescr.module.scss'
 
 interface IHeroPageDescr {
   affiliation: string | undefined

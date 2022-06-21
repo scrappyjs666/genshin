@@ -11,7 +11,6 @@ import HomePage from './pages/HomePage'
 import Login from './pages/Login/Login'
 import NotFoundPage from './pages/NotFoundPage'
 
-
 const App: React.FC = () => {
   return (
     <>

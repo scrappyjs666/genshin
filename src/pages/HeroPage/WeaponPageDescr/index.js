@@ -1,1 +1,1 @@
-export { default } from './WeaponPageDescr';
+export { default } from './WeaponPageDescr'

@@ -2,12 +2,9 @@ import AutoRegistration from 'components/AutoRegistration'
 import EntireUserError from 'components/EntireUserError/EntireUserError'
 import SocialIcons from 'components/SocialIcons'
 import {
-  browserLocalPersistence,
   createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
-  onAuthStateChanged,
-  setPersistence,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from 'firebase/auth'
@@ -26,26 +23,6 @@ const LoginForm = () => {
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
   const provider = new GoogleAuthProvider()
-
-  useEffect(() => {
-    const getUser = () => {
-      const auth = getAuth()
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          dispatch(
-            setUser({
-              email: user.email,
-              id: user.uid,
-              token: user.accessToken,
-            })
-          )
-        } else {
-          console.log(user, 'no user')
-        }
-      })
-    }
-    getUser()
-  }, [])
 
   const loginGoogle = async () => {
     const auth = getAuth()

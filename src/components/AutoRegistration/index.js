@@ -1,1 +1,1 @@
-export { default } from './AutoRegistration.tsx';
+export { default } from './AutoRegistration.tsx'

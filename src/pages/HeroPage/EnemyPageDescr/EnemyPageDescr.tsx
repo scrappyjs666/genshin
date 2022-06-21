@@ -1,5 +1,5 @@
-import styles from './EnemyPageDescr.module.scss'
 import React from 'react'
+import styles from './EnemyPageDescr.module.scss'
 
 interface IEnemyPageDescr {
   id: string | undefined

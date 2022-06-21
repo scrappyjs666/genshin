@@ -1,1 +1,1 @@
-export { default } from './EnemyPageDescr';
+export { default } from './EnemyPageDescr'

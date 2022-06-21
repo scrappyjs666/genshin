@@ -1,24 +1,29 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getApiResource } from 'api/network'
+import axios from 'axios'
 import type { RootState } from './store'
+import { Hero, HeroList } from './types'
 
-type Hero = {
-  id: any
-  item: string
-}
-
-interface HeroList {
-  items: Hero[]
-  backColor: string
-  item: string
-}
+const backColorElem = 'linear-gradient(to right, #ff4b2b, #ff416c)'
 
 const initialState: HeroList = {
   items: JSON.parse(localStorage.getItem('items')!)
     ? JSON.parse(localStorage.getItem('items')!)
     : [{ id: '', item: '' }],
-  backColor: 'linear-gradient(to right, #ff4b2b, #ff416c)',
+  backColor: backColorElem,
   item: '',
+  status: 'loading',
+  initialData: [],
+  data: [],
 }
+
+const fetchHeroByHeroList = createAsyncThunk(
+  'heroList/fetchByIdStatus',
+  async (url) => {
+    const { data } = await axios.get<string[]>(await getApiResource(url))
+    return data
+  }
+)
 
 export const heroListSlice = createSlice({
   name: 'heroList',
@@ -40,6 +45,26 @@ export const heroListSlice = createSlice({
       state.items.splice(index, 1)
       localStorage.setItem('items', JSON.stringify(state.items))
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchHeroByHeroList.pending, (state) => {
+      state.status = 'loading'
+      state.items = []
+    })
+
+    builder.addCase(
+      fetchHeroByHeroList.fulfilled,
+      (state, action: PayloadAction<string[]>) => {
+        state.status = 'success'
+        state.data = action.payload
+        state.initialData = action.payload
+      }
+    )
+
+    builder.addCase(fetchHeroByHeroList.rejected, (state) => {
+      state.status = 'error'
+      state.items = []
+    })
   },
 })
 

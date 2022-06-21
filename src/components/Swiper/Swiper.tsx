@@ -2,11 +2,12 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-cards'
 import AddHero from 'components/AddHero'
+import { Item } from 'pages/HeroPageList/types'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { removeItem } from 'Store/heroListSlice'
 import { EffectCards, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { removeItem } from '../../Store/heroListSlice'
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
 import HeroCard from '../HeroCard'
 import imgBtn from './img/star.svg'
@@ -17,11 +18,8 @@ const SwiperBakset: React.FC = () => {
   const dispatch = useAppDispatch()
   const heroes = useAppSelector((state) => state.heroList.items)
 
-  interface Item {
-    id: string
-    item: string
-  }
   const added = 'added to favorites'
+  const hvHero = 'You have not been added to favorites yet Characters'
 
   const isHero = heroes.findIndex((el) => el.id === 'characters')
   const isEnemies = heroes.findIndex((el) => el.id === 'enemies')
@@ -57,7 +55,7 @@ const SwiperBakset: React.FC = () => {
         </Swiper>
       ) : (
         <Link to="/HeroPageList/characters">
-          <AddHero text="You have not been added to favorites yet Characters" />
+          <AddHero text={hvHero} />
         </Link>
       )}
       <div className={styles.Swiper__title}>Your favorites Enemies</div>
@@ -88,7 +86,7 @@ const SwiperBakset: React.FC = () => {
         </Swiper>
       ) : (
         <Link to="/HeroPageList/enemies">
-          <AddHero text="You have not been added to favorites yet enemies" />
+          <AddHero text={hvHero} />
         </Link>
       )}
       <div className={styles.Swiper__title}>Your favorites Weapons</div>
@@ -119,7 +117,7 @@ const SwiperBakset: React.FC = () => {
         </Swiper>
       ) : (
         <Link to="/HeroPageList/weapons">
-          <AddHero text="You have not been added to favorites yet Weapons" />
+          <AddHero text={hvHero} />
         </Link>
       )}
     </div>

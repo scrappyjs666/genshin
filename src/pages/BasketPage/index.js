@@ -1,1 +1,1 @@
-export { default } from './BasketPage';
+export { default } from './BasketPage'

@@ -1,7 +1,7 @@
-import styles from './HeroPageWrap.module.scss'
 import React from 'react'
+import styles from './HeroPageWrap.module.scss'
 
-type Props = {
+interface Props {
   children: React.ReactNode
   title: string
 }

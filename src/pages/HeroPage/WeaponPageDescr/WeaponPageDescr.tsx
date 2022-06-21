@@ -1,5 +1,5 @@
-import styles from './WeaponPageDescr.module.scss'
 import React from 'react'
+import styles from './WeaponPageDescr.module.scss'
 
 interface IWeaponPageDescr {
   ascensionMaterial: string | undefined

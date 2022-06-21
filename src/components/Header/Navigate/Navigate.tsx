@@ -1,7 +1,7 @@
 import BtnHeader from 'components/BtnHeader'
 import { Link } from 'react-router-dom'
-import styles from './Navigate.module.scss'
 import Sound from '../Sound'
+import styles from './Navigate.module.scss'
 
 const Navigate = () => {
   return (

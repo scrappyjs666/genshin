@@ -1,1 +1,1 @@
-export { default } from './HeroPageWrap';
+export { default } from './HeroPageWrap'
