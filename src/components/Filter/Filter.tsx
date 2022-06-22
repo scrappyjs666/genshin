@@ -1,22 +1,18 @@
 import React from 'react'
+import { allHero, favoriteHero, sortAZ, sortZA } from 'Store/heroListSlice'
+import { useAppDispatch } from 'Store/hooks/hooks'
 import FilterBtn from '../BtnHeader'
 import styles from './Filter.module.scss'
 
-interface IFilter {
-  sortAZ: () => void
-  sortZA: () => void
-  favorite: () => void
-  allHero: () => void
-}
-
-const Filter: React.FC<IFilter> = ({ sortAZ, sortZA, favorite, allHero }) => {
+const Filter: React.FC = () => {
+  const dispatch = useAppDispatch()
   return (
     <>
       <div className={styles.filter}>
-        <FilterBtn fn={() => allHero()} name="all hero" />
-        <FilterBtn fn={() => favorite()} name="favorite hero" />
-        <FilterBtn fn={() => sortAZ()} name="name A-Z" />
-        <FilterBtn fn={() => sortZA()} name="name Z-A" />
+        <FilterBtn fn={dispatch(allHero)} name="all hero" />
+        <FilterBtn fn={dispatch(favoriteHero)} name="favorite hero" />
+        <FilterBtn fn={dispatch(sortAZ)} name="name A-Z" />
+        <FilterBtn fn={dispatch(sortZA)} name="name Z-A" />
       </div>
     </>
   )

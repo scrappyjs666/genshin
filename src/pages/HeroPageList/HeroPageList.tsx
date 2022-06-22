@@ -1,9 +1,11 @@
 import AddHero from 'components/AddHero'
 import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { addItem } from 'Store/heroListSlice'
+import {
+  addItem,
+  fetchHeroList,
+} from 'Store/heroListSlice'
 import { inputChangeValue } from 'Store/inputSlice'
-import { getApiResource } from '../../api/network'
 import Container from '../../components/Container'
 import Filter from '../../components/Filter'
 import HeroCard from '../../components/HeroCard'
@@ -15,14 +17,11 @@ import imgBtnAdd from './img/add.svg'
 import imgBtn from './img/star.svg'
 
 const HeroPageList: React.FC = () => {
-  const [data, setData] = useState<string[]>([])
-  const [initialData, setInitialData] = useState<string[]>([])
   const [arrayLenght, setArrayLenght] = useState(10)
-  const [isLoading, setIsLoading] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useAppDispatch()
 
-  const backColor = useAppSelector((state) => state.heroList.backColor)
+  const { backColor, status, data } = useAppSelector((state) => state.heroList)
   let heroArray = useAppSelector((state) => state.heroList.items)
   const inputVal = useAppSelector((state) => state.inputSlice.inputValue)
   if (localStorage.getItem('items')) {
@@ -41,16 +40,7 @@ const HeroPageList: React.FC = () => {
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    window.scrollTo(0, 0)
-    getApiResource(url).then((data) => {
-      setData(data)
-      setInitialData(data)
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 1000)
-    })
-    dispatch(inputChangeValue(''))
+    dispatch(fetchHeroList({ url }))
   }, [url])
 
   useEffect(() => {
@@ -75,25 +65,6 @@ const HeroPageList: React.FC = () => {
     }
   })
 
-  const sortAZ = () => {
-    setData([...data].sort())
-  }
-
-  const sortZA = () => {
-    setData([...data].reverse())
-  }
-
-  const favoriteHero = () => {
-    const result = heroArray
-      .filter((el: { id: string }) => el.id === id)
-      .map((el) => el.item)
-    setData(result)
-  }
-
-  const allHero = () => {
-    setData(initialData)
-  }
-
   const scrollHandler = (): void => {
     if (
       document.documentElement.scrollHeight -
@@ -113,19 +84,16 @@ const HeroPageList: React.FC = () => {
 
   return (
     <>
-      {isLoading ? (
+      {status === 'loading' ? (
         <Loader />
       ) : (
         <>
           <div className={styles.HeroPage__filter}>
-            <Filter
-              sortAZ={sortAZ}
-              sortZA={sortZA}
-              favorite={favoriteHero}
-              allHero={allHero}
-            />
+            <Filter />
           </div>
-          {data.length === 0 && !isLoading && <AddHero text={AddHeroFCText} />}
+          {data.length === 0 && status === 'success' && (
+            <AddHero text={AddHeroFCText} />
+          )}
           <Container>
             {data
               .filter(

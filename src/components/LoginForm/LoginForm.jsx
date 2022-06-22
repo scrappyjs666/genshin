@@ -29,7 +29,6 @@ const LoginForm = () => {
     await signInWithPopup(auth, provider)
       .then(({ user }) => {
         console.log(user, user.email)
-        const credential = GoogleAuthProvider.credentialFromResult(user)
         dispatch(
           setUser({
             email: user.email,
@@ -39,7 +38,6 @@ const LoginForm = () => {
         )
       })
       .catch((error) => {
-        const credential = GoogleAuthProvider.credentialFromError(error)
         console.log(error)
       })
   }

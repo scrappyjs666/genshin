@@ -17,10 +17,10 @@ const initialState: HeroList = {
   data: [],
 }
 
-const fetchHeroByHeroList = createAsyncThunk(
+export const fetchHeroList = createAsyncThunk(
   'heroList/fetchByIdStatus',
-  async (url) => {
-    const { data } = await axios.get<string[]>(await getApiResource(url))
+  async ({ url }: { url: string }) => {
+    const { data } = await axios.get<string[]>(url)
     return data
   }
 )
@@ -45,15 +45,29 @@ export const heroListSlice = createSlice({
       state.items.splice(index, 1)
       localStorage.setItem('items', JSON.stringify(state.items))
     },
+    sortAZ: (state) => {
+      state.data = state.data.sort((a, b) => a.localeCompare(b))
+    },
+    sortZA: (state) => {
+      state.data = state.data.reverse()
+    },
+    allHero: (state) => {
+      state.data = state.initialData
+    },
+    favoriteHero: (state, action: PayloadAction<string>) => {
+      state.data = state.items
+        .filter((el: { id: string }) => el.id === action.payload)
+        .map((el) => el.item)
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchHeroByHeroList.pending, (state) => {
+    builder.addCase(fetchHeroList.pending, (state) => {
       state.status = 'loading'
       state.items = []
     })
 
     builder.addCase(
-      fetchHeroByHeroList.fulfilled,
+      fetchHeroList.fulfilled,
       (state, action: PayloadAction<string[]>) => {
         state.status = 'success'
         state.data = action.payload
@@ -61,13 +75,14 @@ export const heroListSlice = createSlice({
       }
     )
 
-    builder.addCase(fetchHeroByHeroList.rejected, (state) => {
+    builder.addCase(fetchHeroList.rejected, (state) => {
       state.status = 'error'
       state.items = []
     })
   },
 })
 
-export const { addItem, removeItem } = heroListSlice.actions
+export const { addItem, removeItem, sortZA, sortAZ, allHero, favoriteHero } =
+  heroListSlice.actions
 
 export default heroListSlice.reducer

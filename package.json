@@ -23,6 +23,7 @@
     "react": "^18.1.0",
     "react-audio-player": "^0.17.0",
     "react-dom": "^18.1.0",
+    "react-firebase-hooks": "^5.0.3",
     "react-icons": "^4.3.1",
     "react-parallax-tilt": "^1.7.38",
     "react-redux": "^8.0.2",
