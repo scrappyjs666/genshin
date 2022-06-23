@@ -1,6 +1,6 @@
-import AutoRegistration from 'components/AutoRegistration'
+import { AutoRegistration } from 'components/AutoRegistration/AutoRegistration'
 import EntireUserError from 'components/EntireUserError/EntireUserError'
-import SocialIcons from 'components/SocialIcons'
+import { SocialIcons } from 'components/SocialIcons/SocialIcons'
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -14,7 +14,7 @@ import { useAppDispatch } from 'Store/hooks/hooks'
 import { setUser } from 'Store/userSlice'
 import styles from './LoginForm.module.scss'
 
-const LoginForm = () => {
+export const LoginForm = () => {
   const [isFlipped, setFlipped] = useState(false)
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
@@ -183,4 +183,3 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm

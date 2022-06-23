@@ -3,7 +3,7 @@ import { useAppSelector } from 'Store/hooks/hooks'
 import gif from './img/5d55575548a30ca21fcdb50285b9c694_6465808929343059713.gif'
 import styles from './Welcome.module.scss'
 
-const Welcome = () => {
+export const Welcome = () => {
   const { isAuth } = useAuth()
   const email = useAppSelector((state) => state.userSlice.email)
   return (
@@ -20,5 +20,3 @@ const Welcome = () => {
     </>
   )
 }
-
-export default Welcome

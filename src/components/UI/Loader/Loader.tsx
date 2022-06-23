@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Loader.module.scss'
 
-const Loader: React.FC = () => {
+export const Loader: React.FC = () => {
   return (
     <>
       <div className={styles.Loader__wrapper}>
@@ -11,5 +11,3 @@ const Loader: React.FC = () => {
     </>
   )
 }
-
-export default Loader

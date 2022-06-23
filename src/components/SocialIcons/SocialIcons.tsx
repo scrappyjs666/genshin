@@ -10,7 +10,7 @@ const arrInfo = [
   { name: tw, link: 'https://twitter.com/GenshinImpact' },
 ]
 
-const SocialIcons: React.FC = () => {
+export const SocialIcons: React.FC = () => {
   return (
     <>
       <div className={styles.Social__wrap}>
@@ -28,5 +28,3 @@ const SocialIcons: React.FC = () => {
     </>
   )
 }
-
-export default SocialIcons

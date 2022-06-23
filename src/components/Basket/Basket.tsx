@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Basket.module.scss'
 
-const Basket: React.FC = () => {
+export const Basket: React.FC = () => {
   return (
     <>
       <Link className={styles.basket} to="/BasketPage">
@@ -13,5 +13,3 @@ const Basket: React.FC = () => {
     </>
   )
 }
-
-export default Basket

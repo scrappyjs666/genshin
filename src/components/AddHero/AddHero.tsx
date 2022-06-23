@@ -6,7 +6,7 @@ interface IAddHero {
   text: string
 }
 
-const AddHero: React.FC<IAddHero> = ({ text }) => {
+export const AddHero: React.FC<IAddHero> = ({ text }) => {
   return (
     <>
       <div className={styles.AddHero}>
@@ -18,4 +18,3 @@ const AddHero: React.FC<IAddHero> = ({ text }) => {
   )
 }
 
-export default AddHero

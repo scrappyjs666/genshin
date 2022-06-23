@@ -10,4 +10,5 @@ export interface HeroList {
   status: 'loading' | 'success' | 'error'
   initialData: string[]
   data: string[]
+  pageID: string | undefined
 }

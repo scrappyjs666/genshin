@@ -1,7 +1,7 @@
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-cards'
-import AddHero from 'components/AddHero'
+import { AddHero } from 'components/AddHero/AddHero'
 import { Item } from 'pages/HeroPageList/types'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -9,11 +9,11 @@ import { removeItem } from 'Store/heroListSlice'
 import { EffectCards, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
-import HeroCard from '../HeroCard'
+import { HeroCard } from 'components/HeroCard/HeroCard'
 import imgBtn from './img/star.svg'
 import styles from './Swiper.module.scss'
 
-const SwiperBakset: React.FC = () => {
+export const SwiperBakset: React.FC = () => {
   const colorBtn = useAppSelector((state) => state.heroList.backColor)
   const dispatch = useAppDispatch()
   const heroes = useAppSelector((state) => state.heroList.items)
@@ -123,5 +123,3 @@ const SwiperBakset: React.FC = () => {
     </div>
   )
 }
-
-export default SwiperBakset

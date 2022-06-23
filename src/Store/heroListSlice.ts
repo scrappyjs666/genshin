@@ -1,24 +1,26 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getApiResource } from 'api/network'
 import axios from 'axios'
-import type { RootState } from './store'
 import { Hero, HeroList } from './types'
 
 const backColorElem = 'linear-gradient(to right, #ff4b2b, #ff416c)'
 
+const isData = () => {
+  const data = localStorage.getItem('items')
+  return data ? JSON.parse(localStorage.getItem('items')!) : [{ id: '', item: '' }]
+}
+
 const initialState: HeroList = {
-  items: JSON.parse(localStorage.getItem('items')!)
-    ? JSON.parse(localStorage.getItem('items')!)
-    : [{ id: '', item: '' }],
+  items: isData(),
   backColor: backColorElem,
   item: '',
   status: 'loading',
   initialData: [],
   data: [],
+  pageID: '',
 }
 
 export const fetchHeroList = createAsyncThunk(
-  'heroList/fetchByIdStatus',
+  'heroList/fetchHeroList',
   async ({ url }: { url: string }) => {
     const { data } = await axios.get<string[]>(url)
     return data
@@ -45,6 +47,9 @@ export const heroListSlice = createSlice({
       state.items.splice(index, 1)
       localStorage.setItem('items', JSON.stringify(state.items))
     },
+    changePageID: (state, action: PayloadAction<string | undefined>) => {
+      state.pageID = action.payload
+    },
     sortAZ: (state) => {
       state.data = state.data.sort((a, b) => a.localeCompare(b))
     },
@@ -54,16 +59,15 @@ export const heroListSlice = createSlice({
     allHero: (state) => {
       state.data = state.initialData
     },
-    favoriteHero: (state, action: PayloadAction<string>) => {
+    favoriteHero: (state) => {
       state.data = state.items
-        .filter((el: { id: string }) => el.id === action.payload)
+        .filter((el: { id: string }) => el.id === state.pageID)
         .map((el) => el.item)
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchHeroList.pending, (state) => {
       state.status = 'loading'
-      state.items = []
     })
 
     builder.addCase(
@@ -82,7 +86,14 @@ export const heroListSlice = createSlice({
   },
 })
 
-export const { addItem, removeItem, sortZA, sortAZ, allHero, favoriteHero } =
-  heroListSlice.actions
+export const {
+  addItem,
+  removeItem,
+  sortZA,
+  sortAZ,
+  allHero,
+  favoriteHero,
+  changePageID,
+} = heroListSlice.actions
 
 export default heroListSlice.reducer

@@ -5,7 +5,7 @@ import { IoVolumeMedium, IoVolumeMute } from 'react-icons/io5'
 import soundfile from './Music/genshin.mp3'
 import styles from './Sound.module.scss'
 
-const Sound: React.FC = () => {
+export const Sound: React.FC = () => {
   const [sound, setSound] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
   const soundToggle = () => {
@@ -35,5 +35,3 @@ const Sound: React.FC = () => {
     </>
   )
 }
-
-export default Sound

@@ -9,7 +9,7 @@ interface IEntireUser {
   setLoginError: any
 }
 
-const EntireUserError: React.FC<IEntireUser> = ({
+export const EntireUserError: React.FC<IEntireUser> = ({
   loginError,
   setLoginError,
 }) => {

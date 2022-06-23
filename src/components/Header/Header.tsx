@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Account from './Account/Account'
+import { Account } from './Account/Account'
 import styles from './Header.module.scss'
-import Logo from './Logo'
-import Navigate from './Navigate'
-import Search from './Search'
+import { Logo } from './Logo/Logo'
+import { Search } from './Search/Search'
+import { Navigate } from './Navigate/Navigate'
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   return (
     <>
       <div className={styles.header__wrap}>
@@ -23,4 +23,3 @@ const Header: React.FC = () => {
   )
 }
 
-export default Header

@@ -6,7 +6,7 @@ interface IAutoRegistration {
   loginGoogle: () => void
 }
 
-const AutoRegistration: React.FC<IAutoRegistration> = ({ loginGoogle }) => {
+export const AutoRegistration: React.FC<IAutoRegistration> = ({ loginGoogle }) => {
   const arrInfo = [{ name: google }]
 
   return (
@@ -27,4 +27,3 @@ const AutoRegistration: React.FC<IAutoRegistration> = ({ loginGoogle }) => {
   )
 }
 
-export default AutoRegistration

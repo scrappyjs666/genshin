@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { getApiResource } from '../../api/network'
-import Loader from '../../components/UI/Loader'
+import { Loader } from 'components'
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
 import EnemyPageDescr from './EnemyPageDescr'
-import styles from './HeroPage.module.scss'
 import HeroPageCard from './HeroPageCard'
 import HeroPageDescr from './HeroPageDescr'
 import HeroPageWrap from './HeroPageWrap'
 import startimg from './img/star.svg'
-import { IHero } from './Interface'
+import { IHero } from '../../Store/Interface'
 import WeaponPageDescr from './WeaponPageDescr'
+import { fetchHeroPage } from 'Store/heroPageSlice'
 
 const HeroPage: React.FC = () => {
   const dispatch = useAppDispatch()
+  const {status, heroPageArray} = useAppSelector((state) => state.heroPage)
 
-  const [HeroInfo, setHeroInfo] = useState<IHero>()
-  const [isLoading, setIsLoading] = useState(false)
   const { id } = useParams()
   const location = useLocation()
   const urlParams = location.pathname.split('/')
@@ -24,74 +23,67 @@ const HeroPage: React.FC = () => {
   const url = `https://api.genshin.dev/${urlCategory}/${id}`
 
   useEffect(() => {
-    setIsLoading(true)
-    window.scrollTo(0, 0)
-    getApiResource(url).then((data) => {
-      setHeroInfo(data)
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 1500)
-    })
+    dispatch(fetchHeroPage({url}))
   }, [])
 
-  const img =
-    urlCategory === 'characters'
-      ? `/images/characters/${String(
-          HeroInfo?.name.toLowerCase().replace(/ /g, '-')
-        )}/gacha-card`
-      : `/images/${urlCategory}/${urlParams[3]}/icon`
+  // const img =
+  //   urlCategory === 'characters'
+  //     ? `/images/characters/${String(
+  //         heroPageArray?.name.toLowerCase().replace(/ /g, '-')
+  //       )}/gacha-card`
+  //     : `/images/${urlCategory}/${urlParams[3]}/icon`
 
   return (
     <>
-      {isLoading ? (
+      {/* {status === 'loading' ? (
         <Loader />
       ) : (
         <HeroPageWrap title={urlParams[3]}>
           <HeroPageCard img={img} />
           {urlCategory === 'characters' ? (
             <HeroPageDescr
-              affiliation={HeroInfo?.affiliation}
-              birthday={HeroInfo?.birthday}
-              constellation={HeroInfo?.constellation}
-              description={HeroInfo?.description}
-              nation={HeroInfo?.nation}
-              rarity={HeroInfo?.rarity}
+              affiliation={heroPageArray?.affiliation}
+              birthday={heroPageArray?.birthday}
+              constellation={heroPageArray?.constellation}
+              description={heroPageArray?.description}
+              nation={heroPageArray?.nation}
+              rarity={heroPageArray?.rarity}
               rarityImg={startimg}
-              vision={HeroInfo?.vision}
-              weapon={HeroInfo?.weapon}
-              weapon_type={HeroInfo?.weapon_type}
+              vision={heroPageArray?.vision}
+              weapon={heroPageArray?.weapon}
+              weapon_type={heroPageArray?.weapon_type}
               visionImg={`/images/elements/${String(
-                HeroInfo?.vision.toLowerCase()
+                heroPageArray?.vision.toLowerCase()
               )}/icon`}
             />
           ) : null}
           {urlCategory === 'enemies' ? (
             <EnemyPageDescr
-              id={HeroInfo?.id}
-              name={HeroInfo?.name}
-              description={HeroInfo?.description}
-              region={HeroInfo?.region}
-              type={HeroInfo?.type}
-              family={HeroInfo?.family}
-              Faction={HeroInfo?.faction}
+              id={heroPageArray?.id}
+              name={heroPageArray?.name}
+              description={heroPageArray?.description}
+              region={heroPageArray?.region}
+              type={heroPageArray?.type}
+              family={heroPageArray?.family}
+              Faction={heroPageArray?.faction}
             />
           ) : null}
           {urlCategory === 'weapons' ? (
             <WeaponPageDescr
-              ascensionMaterial={HeroInfo?.ascensionMaterial}
-              baseAttack={HeroInfo?.baseAttack}
-              location={HeroInfo?.location}
-              name={HeroInfo?.name}
-              passiveDesc={HeroInfo?.passiveDesc}
-              passiveName={HeroInfo?.passiveName}
-              rarity={HeroInfo?.rarity}
-              subStat={HeroInfo?.subStat}
-              type={HeroInfo?.type}
+              ascensionMaterial={heroPageArray?.ascensionMaterial}
+              baseAttack={heroPageArray?.baseAttack}
+              location={heroPageArray?.location}
+              name={heroPageArray?.name}
+              passiveDesc={heroPageArray?.passiveDesc}
+              passiveName={heroPageArray?.passiveName}
+              rarity={heroPageArray?.rarity}
+              subStat={heroPageArray?.subStat}
+              type={heroPageArray?.type}
               rarityImg={startimg}
             />
           ) : null}
         </HeroPageWrap>
-      )}
+      )} */}
     </>
   )
 }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styles from './HeroCard.module.scss'
 import { ICard } from './interface'
 
-const HeroCard: React.FC<ICard> = ({
+export const HeroCard: React.FC<ICard> = ({
   title,
   img,
   btnText,
@@ -43,5 +43,3 @@ const HeroCard: React.FC<ICard> = ({
     </Link>
   )
 }
-
-export default HeroCard

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useAppSelector } from 'Store/hooks/hooks'
 import styles from './Account.module.scss'
 
-const Account: React.FC = () => {
+export const Account: React.FC = () => {
   const { isAuth } = useAuth()
   const email = useAppSelector((state) => state.userSlice.email)
   const isLogin = (
@@ -20,4 +20,3 @@ const Account: React.FC = () => {
   )
 }
 
-export default Account

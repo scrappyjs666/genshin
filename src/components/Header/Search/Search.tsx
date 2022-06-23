@@ -6,7 +6,7 @@ import closeIcon from './img/close-icon.svg'
 import search from './img/search.svg'
 import styles from './Search.module.scss'
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const [inputValue, setInputValue] = useState('')
   const dispatch = useAppDispatch()
   const changeInputValue = debounce(
@@ -46,5 +46,3 @@ const Search: React.FC = () => {
     </div>
   )
 }
-
-export default Search

@@ -1,15 +1,8 @@
-import AddHero from 'components/AddHero'
+import { AddHero, Container, Filter, HeroCard, Loader } from 'components'
 import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import {
-  addItem,
-  fetchHeroList,
-} from 'Store/heroListSlice'
+import { addItem, changePageID, fetchHeroList } from 'Store/heroListSlice'
 import { inputChangeValue } from 'Store/inputSlice'
-import Container from '../../components/Container'
-import Filter from '../../components/Filter'
-import HeroCard from '../../components/HeroCard'
-import Loader from '../../components/UI/Loader'
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
 import { excludedData } from './excludedData'
 import styles from './HeroPageList.module.scss'
@@ -21,12 +14,10 @@ const HeroPageList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useAppDispatch()
 
-  const { backColor, status, data } = useAppSelector((state) => state.heroList)
-  let heroArray = useAppSelector((state) => state.heroList.items)
+  const { backColor, status, data, items } = useAppSelector(
+    (state) => state.heroList
+  )
   const inputVal = useAppSelector((state) => state.inputSlice.inputValue)
-  if (localStorage.getItem('items')) {
-    heroArray = JSON.parse(localStorage.getItem('items')!)
-  }
 
   const { id } = useParams()
   const url = `https://api.genshin.dev/${id}`
@@ -40,6 +31,7 @@ const HeroPageList: React.FC = () => {
   }
 
   useEffect(() => {
+    dispatch(changePageID(id))
     dispatch(fetchHeroList({ url }))
   }, [url])
 
@@ -109,17 +101,15 @@ const HeroPageList: React.FC = () => {
                   id={item}
                   minHeight={id === 'weapons' ? '240px' : ''}
                   backColor={
-                    heroArray.find((el) => el.item === item) ? backColor : ''
+                    items.find((el) => el.item === item) ? backColor : ''
                   }
                   title={item}
                   img={`../images/${id}/${item}${img}`}
                   imgBtn={
-                    heroArray.find((el) => el.item === item)
-                      ? imgBtn
-                      : imgBtnAdd
+                    items.find((el) => el.item === item) ? imgBtn : imgBtnAdd
                   }
                   btnText={
-                    heroArray.find((el) => el.item === item) ? added : selected
+                    items.find((el) => el.item === item) ? added : selected
                   }
                   addHero={(): void => addHero(item)}
                 />
