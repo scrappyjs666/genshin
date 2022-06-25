@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 import { IoIosFunnel } from 'react-icons/io'
 import styles from './FilterBtn.module.scss'
 
@@ -17,4 +17,3 @@ export const FilterBtn: React.FC<IFilterBtn> = ({ name, fn }) => {
     </>
   )
 }
-

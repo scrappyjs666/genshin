@@ -17,4 +17,3 @@ export const AddHero: React.FC<IAddHero> = ({ text }) => {
     </>
   )
 }
-

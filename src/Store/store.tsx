@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import heroList from './heroListSlice'
-import inputSlice from './inputSlice'
-import userSlice from './userSlice'
-import heroPage from './heroPageSlice'
+import heroList from './heroList/heroListSlice'
+import heroPage from './heroPage/heroPageSlice'
+import inputSlice from './input/inputSlice'
+import userSlice from './user/userSlice'
 
 export const store = configureStore({
   reducer: {

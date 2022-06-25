@@ -9,9 +9,9 @@ import {
   signInWithPopup,
 } from 'firebase/auth'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAppDispatch } from 'Store/hooks/hooks'
-import { setUser } from 'Store/userSlice'
+import { setUser } from 'Store/user/userSlice'
 import styles from './LoginForm.module.scss'
 
 export const LoginForm = () => {
@@ -89,97 +89,10 @@ export const LoginForm = () => {
     setFlipped((curr) => curr === false)
   }
 
-  const frontCard = () => {
-    return (
-      <form className={styles.LoginForm}>
-        <h2 className={styles.LoginForm__text}>Registration</h2>
-        <input
-          placeholder="Type your E-mail"
-          className={styles.LoginForm__input}
-          type="e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          placeholder="Type your Password"
-          className={styles.LoginForm__input}
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          onClick={(e) => {
-            e.preventDefault(e)
-            createAcc(email, password)
-          }}
-          className={styles.LoginForm__submit}
-        >
-          create account
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault()
-            flippedToggle()
-          }}
-          className={styles.LoginForm__descr}
-        >
-          Alredy have an account? Login
-        </button>
-        <Link to="HomePage">
-          <button className={styles.LoginForm__skip}>Skip this</button>
-        </Link>
-        <AutoRegistration loginGoogle={loginGoogle} />
-      </form>
-    )
-  }
-
-  const backCard = () => {
-    return (
-      <form className={styles.LoginForm}>
-        <h2 className={styles.LoginForm__text}>Login</h2>
-        <input
-          placeholder="Your E-mail"
-          className={styles.LoginForm__input}
-          type="e-mail"
-          onChange={(e) => setLoginEmail(e.target.value)}
-        />
-        <input
-          placeholder="Your Password"
-          className={styles.LoginForm__input}
-          type="password"
-          onChange={(e) => setLoginPassword(e.target.value)}
-        />
-        <button
-          onClick={(e) => {
-            e.preventDefault(e)
-            signUp(loginEmail, loginPassword)
-          }}
-          className={styles.LoginForm__submit}
-        >
-          Login
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault(e)
-            flippedToggle()
-          }}
-          className={styles.LoginForm__descr}
-        >
-          Don't have an Account? Create account
-        </button>
-        <Link to="HomePage">
-          <button className={styles.LoginForm__skip}>Skip this</button>
-        </Link>
-        <SocialIcons />
-      </form>
-    )
-  }
-
   return (
     <>
       <EntireUserError loginError={loginError} setLoginError={setLoginError} />
-      {loginError === false ? (isFlipped ? frontCard() : backCard()) : null}
+      {loginError === false ? (isFlipped ? <frontCard /> : <backCard />) : null}
     </>
   )
 }
-

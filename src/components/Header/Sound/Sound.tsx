@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import ReactAudioPlayer from 'react-audio-player'
-import onCanPlay from 'react-audio-player'
+import React, { useRef, useState } from 'react'
 import { IoVolumeMedium, IoVolumeMute } from 'react-icons/io5'
 import soundfile from './Music/genshin.mp3'
 import styles from './Sound.module.scss'

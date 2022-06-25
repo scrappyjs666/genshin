@@ -19,4 +19,3 @@ export const Account: React.FC = () => {
     </>
   )
 }
-

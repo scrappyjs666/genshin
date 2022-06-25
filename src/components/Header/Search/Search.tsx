@@ -1,7 +1,7 @@
 import debounce from 'lodash.debounce'
 import React, { useEffect, useState } from 'react'
+import { inputChangeValue, removeInputField } from 'Store/input/inputSlice'
 import { useAppDispatch, useAppSelector } from '../../../Store/hooks/hooks'
-import { inputChangeValue, removeInputField } from '../../../Store/inputSlice'
 import closeIcon from './img/close-icon.svg'
 import search from './img/search.svg'
 import styles from './Search.module.scss'
@@ -20,6 +20,8 @@ export const Search: React.FC = () => {
     setInputValue(inputValueRedux)
   }, [inputValueRedux])
 
+  const placeholderText = 'Find your favorite character'
+
   return (
     <div className={styles.search__wrapp}>
       <input
@@ -28,7 +30,7 @@ export const Search: React.FC = () => {
           changeInputValue(e)
           setInputValue(e.target.value)
         }}
-        placeholder="Find your favorite character"
+        placeholder={placeholderText}
         className={styles.search}
       />
       <button className={styles.button__search}>

@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useAppDispatch, useAppSelector } from 'Store/hooks/hooks'
-import { setUser } from 'Store/userSlice'
+import { setUser } from 'Store/user/userSlice'
 
 export function useAuth() {
   const dispatch = useAppDispatch()

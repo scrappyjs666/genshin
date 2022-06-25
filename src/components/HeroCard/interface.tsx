@@ -8,7 +8,7 @@ export interface ICard {
   id?: string
   minHeight?: string
   category?: string | undefined
-  addHero?: Function
-  findIndex?: Function
-  deleteItem?: Function
+  addHero?: () => void
+  findIndex?: () => void
+  deleteItem?: () => void
 }

@@ -1,11 +1,15 @@
+import axios from 'axios'
 import { AddHero, Container, Filter, HeroCard, Loader } from 'components'
 import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { addItem, changePageID, fetchHeroList } from 'Store/heroListSlice'
-import { inputChangeValue } from 'Store/inputSlice'
+import {
+  addItem,
+  changePageID,
+  fetchHeroList,
+} from 'Store/heroList/heroListSlice'
+import { inputChangeValue } from 'Store/input/inputSlice'
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
 import { excludedData } from './excludedData'
-import styles from './HeroPageList.module.scss'
 import imgBtnAdd from './img/add.svg'
 import imgBtn from './img/star.svg'
 
@@ -80,9 +84,7 @@ const HeroPageList: React.FC = () => {
         <Loader />
       ) : (
         <>
-          <div className={styles.HeroPage__filter}>
-            <Filter />
-          </div>
+          <Filter />
           {data.length === 0 && status === 'success' && (
             <AddHero text={AddHeroFCText} />
           )}

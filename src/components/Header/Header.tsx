@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Account } from './Account/Account'
 import styles from './Header.module.scss'
 import { Logo } from './Logo/Logo'
-import { Search } from './Search/Search'
 import { Navigate } from './Navigate/Navigate'
+import { Search } from './Search/Search'
 
 export const Header: React.FC = () => {
   return (
@@ -22,4 +22,3 @@ export const Header: React.FC = () => {
     </>
   )
 }
-

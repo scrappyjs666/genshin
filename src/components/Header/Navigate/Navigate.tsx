@@ -1,7 +1,7 @@
+import { FilterBtn } from 'components/FilterBtn/FilterBtn'
 import { Link } from 'react-router-dom'
 import { Sound } from '../Sound/Sound'
 import styles from './Navigate.module.scss'
-import { FilterBtn } from 'components/FilterBtn/FilterBtn'
 
 export const Navigate = () => {
   return (
