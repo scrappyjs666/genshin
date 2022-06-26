@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from 'Store/hooks/hooks'
 import { signUp } from 'Store/user/userSlice'
-import styles from '../LoginForm.module'
+import styles from '../LoginForm.module.scss'
 
 const BackCard = () => {
   const [loginEmail, setLoginEmail] = useState('')
@@ -29,7 +29,7 @@ const BackCard = () => {
         <button
           onClick={(e) => {
             e.preventDefault(e)
-            dispatch(signUp(loginEmail, loginPassword))
+            dispatch(signUp({ loginEmail, loginPassword }))
           }}
           className={styles.LoginForm__submit}
         >

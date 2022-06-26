@@ -30,7 +30,7 @@ const FrontCard = () => {
         <button
           onClick={(e) => {
             e.preventDefault(e)
-            dispatch(createAcc(email, password))
+            dispatch(createAcc({ email, password }))
           }}
           className={styles.LoginForm__submit}
         >
