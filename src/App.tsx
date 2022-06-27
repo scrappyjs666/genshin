@@ -1,6 +1,7 @@
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Basket, Header } from 'components'
+import Profile from 'pages/Profile/Profile'
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import BasketPage from './pages/BasketPage'
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/HeroPage/:category/:id" element={<HeroPage />} />
         <Route path="BasketPage" element={<BasketPage />} />
         <Route path="HomePage" element={<HomePage />} />
+        <Route path="Profile" element={<Profile />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

@@ -1,7 +1,7 @@
-import { SocialIcons } from 'components/SocialIcons/SocialIcons'
+import { SocialIcons } from 'components/UI/SocialIcons/SocialIcons'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'Store/hooks/hooks'
+import { useAppDispatch } from 'Store/hooks/hooks'
 import { signUp } from 'Store/user/userSlice'
 import styles from '../LoginForm.module.scss'
 

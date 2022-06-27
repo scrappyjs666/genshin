@@ -1,23 +1,20 @@
 import cn from 'classnames'
 import { MouseEventHandler } from 'react'
+import { useAppSelector } from 'Store/hooks/hooks'
 import styles from './EntireUserError.module.scss'
 import sadimage from './img/sad.png'
 
 interface IEntireUser {
   fn?: MouseEventHandler<HTMLButtonElement> | undefined
-  loginError: any
-  setLoginError: any
 }
 
-export const EntireUserError: React.FC<IEntireUser> = ({
-  loginError,
-  setLoginError,
-}) => {
+export const EntireUserError: React.FC<IEntireUser> = () => {
+  const { status } = useAppSelector((state) => state.userSlice)
   return (
     <>
       <div
         className={
-          loginError
+          status === 'error'
             ? cn(styles.EntireUserError__wrap, styles.modal__active)
             : styles.EntireUserError__wrap
         }
@@ -30,12 +27,7 @@ export const EntireUserError: React.FC<IEntireUser> = ({
           <div className={styles.EntireUserError__text}>
             Unfortunately, we could not find such an account please try again
           </div>
-          <button
-            onClick={() => setLoginError(false)}
-            className={styles.EntireUserError__button}
-          >
-            Try Again
-          </button>
+          <button className={styles.EntireUserError__button}>Try Again</button>
         </div>
       </div>
     </>

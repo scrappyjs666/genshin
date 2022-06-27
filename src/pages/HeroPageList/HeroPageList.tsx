@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { AddHero, Container, Filter, HeroCard, Loader } from 'components'
+import { AddHero, Filter, HeroCard, Loader } from 'components'
 import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import {
@@ -10,6 +9,7 @@ import {
 import { inputChangeValue } from 'Store/input/inputSlice'
 import { useAppDispatch, useAppSelector } from '../../Store/hooks/hooks'
 import { excludedData } from './excludedData'
+import styles from './HeroPageList.module.scss'
 import imgBtnAdd from './img/add.svg'
 import imgBtn from './img/star.svg'
 
@@ -88,7 +88,7 @@ const HeroPageList: React.FC = () => {
           {data.length === 0 && status === 'success' && (
             <AddHero text={AddHeroFCText} />
           )}
-          <Container>
+          <div className={styles.Container}>
             {data
               .filter(
                 (val) =>
@@ -116,7 +116,7 @@ const HeroPageList: React.FC = () => {
                   addHero={(): void => addHero(item)}
                 />
               ))}
-          </Container>
+          </div>
         </>
       )}
     </>

@@ -1,28 +1,31 @@
 import { Loader, LoginForm, Welcome } from 'components'
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { useAuth } from 'hooks/use-auth'
-import { useEffect, useState } from 'react'
+import { getAuth } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { Navigate } from 'react-router'
-import styles from './Login.module.scss'
+import { useAppSelector } from 'Store/hooks/hooks'
+import EntireUserError from '../../components/EntireUserError/EntireUserError'
 
 const Login = () => {
-  const { isAuth, email } = useAuth()
   const auth = getAuth()
-  const [user, loading, error] = useAuthState(auth)
+  const [user, loading] = useAuthState(auth)
+  const { status } = useAppSelector((state) => state.userSlice)
 
-  const login = () => {
-    signInWithEmailAndPassword(auth, 'test@test.com', 'password')
+  const render = () => {
+    if (loading) {
+      return <Loader />
+    }
+
+    if (user) {
+      return <Welcome />
+    }
+
+    if (status === 'error') {
+      return <EntireUserError />
+    }
+
+    return <LoginForm />
   }
-  const logout = () => {
-    signOut(auth)
-  }
-  return (
-    <>
-      {!isAuth && loading && <Loader />}
-      {isAuth && loading ? <Welcome /> : <LoginForm />}
-    </>
-  )
+
+  return <>{render()}</>
 }
 
 export default Login

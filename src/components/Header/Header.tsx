@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Account } from './Account/Account'
 import styles from './Header.module.scss'
-import { Logo } from './Logo/Logo'
+import { Logo } from 'components/UI/Logo/Logo'
 import { Navigate } from './Navigate/Navigate'
-import { Search } from './Search/Search'
+import { Search } from 'components/UI/Search/Search'
 
 export const Header: React.FC = () => {
   return (

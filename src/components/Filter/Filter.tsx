@@ -1,4 +1,4 @@
-import { FilterBtn } from 'components/FilterBtn/FilterBtn'
+import { Button } from 'components/UI/Button/Button'
 import React from 'react'
 import {
   allHero,
@@ -15,10 +15,10 @@ export const Filter: React.FC = () => {
     <>
       <div className={styles.Filter__wrap}>
         <div className={styles.filter}>
-          <FilterBtn fn={() => dispatch(allHero())} name="all hero" />
-          <FilterBtn fn={() => dispatch(favoriteHero())} name="favorite hero" />
-          <FilterBtn fn={() => dispatch(sortAZ())} name="name A-Z" />
-          <FilterBtn fn={() => dispatch(sortZA())} name="name Z-A" />
+          <Button fn={() => dispatch(allHero())} name="all hero" />
+          <Button fn={() => dispatch(favoriteHero())} name="favorite hero" />
+          <Button fn={() => dispatch(sortAZ())} name="name A-Z" />
+          <Button fn={() => dispatch(sortZA())} name="name Z-A" />
         </div>
       </div>
     </>

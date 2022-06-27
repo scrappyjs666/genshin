@@ -1,5 +1,9 @@
-.HeroPage__filter {
+.Container {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
-  margin: 15px 0;
+  justify-items: center;
+  max-width: 1480px;
+  padding: 20px;
+  margin: 0 auto;
 }

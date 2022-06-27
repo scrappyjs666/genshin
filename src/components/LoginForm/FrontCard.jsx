@@ -1,8 +1,8 @@
-import { AutoRegistration } from 'components/AutoRegistration/AutoRegistration'
+import { GoogleAuth } from 'components/UI/GoogleAuth/GoogleAuth'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from 'Store/hooks/hooks'
-import { createAcc, googleSignIn } from 'Store/user/userSlice'
+import { createAcc } from 'Store/user/userSlice'
 import styles from './LoginForm.module.scss'
 
 const FrontCard = () => {
@@ -42,7 +42,7 @@ const FrontCard = () => {
         <Link to="HomePage">
           <button className={styles.LoginForm__skip}>Skip this</button>
         </Link>
-        <AutoRegistration />
+        <GoogleAuth />
       </form>
     </>
   )

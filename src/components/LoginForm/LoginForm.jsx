@@ -1,26 +1,9 @@
-import EntireUserError from 'components/EntireUserError/EntireUserError'
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'Store/hooks/hooks'
-import styles from './LoginForm.module.scss'
-import BackCard from './LoginBackCard/BackCard'
+import { useAppSelector } from 'Store/hooks/hooks'
 import FrontCard from './FrontCard'
+import BackCard from './LoginBackCard/BackCard'
 
 export const LoginForm = () => {
-  const [isFlipped, setFlipped] = useState(false)
-  const [loginError, setLoginError] = useState(false)
-  const dispatch = useAppDispatch()
-  const { status } = useAppSelector((state) => state.userSlice
-  )
-  // useEffect(() => {
-  //   document.body.addEventListener('click', removeModal)
-  //   return () => document.body.removeEventListener('click', removeModal)
-  // }, [])
+  const { status } = useAppSelector((state) => state.userSlice)
 
-
-  return (
-    <>
-      {status === 'loading' ? <FrontCard/> : <BackCard/>}
-    </>
-  )
+  return <>{status === 'loading' ? <FrontCard /> : <BackCard />}</>
 }
