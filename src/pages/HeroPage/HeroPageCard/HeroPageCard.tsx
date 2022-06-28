@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import Tilt from 'react-parallax-tilt'
 import styles from './HeroPageCard.module.scss'
 

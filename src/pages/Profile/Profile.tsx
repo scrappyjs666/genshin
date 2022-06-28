@@ -1,7 +1,7 @@
 import { Button } from 'components'
 import { getAuth, signOut } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Loader } from '../../components/UI/Loader/Loader'
 import emptyPhoto from './img/emptyPhotoProfile.jpg'
 import styles from './Profile.module.scss'

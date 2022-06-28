@@ -1,5 +1,4 @@
 import { Button } from 'components/UI/Button/Button'
-import React from 'react'
 import {
   allHero,
   favoriteHero,
@@ -9,7 +8,7 @@ import {
 import { useAppDispatch } from 'Store/hooks/hooks'
 import styles from './Filter.module.scss'
 
-export const Filter: React.FC = () => {
+export const Filter = () => {
   const dispatch = useAppDispatch()
   return (
     <>

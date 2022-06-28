@@ -40,7 +40,7 @@ const WeaponPageDescr: React.FC<IWeaponPageDescr> = ({
           <div className={styles.passiveName}>PassiveName: {passiveName}</div>
           <div className={styles.rarity}>
             Rarity: {rarity}
-            <img className={styles.rarityImg} src={rarityImg} />
+            <img className={styles.rarityImg} src={rarityImg} alt={rarityImg} />
           </div>
           <div className={styles.subStat}>SubStaty: {subStat}</div>
           <div className={styles.type}>Type: {type}</div>

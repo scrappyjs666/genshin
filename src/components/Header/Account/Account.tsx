@@ -1,10 +1,9 @@
 import { getAuth } from 'firebase/auth'
-import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Link } from 'react-router-dom'
 import styles from './Account.module.scss'
 
-export const Account: React.FC = () => {
+export const Account = () => {
   const auth = getAuth()
   const [user, loading] = useAuthState(auth)
 

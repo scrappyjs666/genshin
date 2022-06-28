@@ -5,14 +5,14 @@
 .basket {
   position: fixed;
   top: 83%;
-  left: 93%;
+  left: 91%;
   display: flex;
   letter-spacing: 2px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   width: 90px;
-  height: 50px;
+  height: 90px;
   outline: none;
   z-index: 1000;
   padding: 20px 0;
@@ -58,5 +58,11 @@
   }
   to {
     box-shadow: 0 0 0 20px rgba(55, 55, 55, 0);
+  }
+}
+
+@media screen and (max-width:750px) {
+  .basket {
+    display: none ;
   }
 }

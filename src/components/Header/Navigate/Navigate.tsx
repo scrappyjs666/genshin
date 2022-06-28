@@ -1,3 +1,4 @@
+import BasketSM from 'components/UI/BasketSM/BasketSM'
 import { Button } from 'components/UI/Button/Button'
 import { Sound } from 'components/UI/Sound/Sound'
 import { Link } from 'react-router-dom'
@@ -11,6 +12,7 @@ export const Navigate = () => {
           <Button name="HomePage" />
         </Link>
         <Sound />
+        <BasketSM />
         <Link className={styles.Navigate__link} to="/">
           <Button name="LoginPage" />
         </Link>

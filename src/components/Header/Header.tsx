@@ -1,12 +1,11 @@
-import React from 'react'
+import { Logo } from 'components/UI/Logo/Logo'
+import { Search } from 'components/UI/Search/Search'
 import { Link } from 'react-router-dom'
 import { Account } from './Account/Account'
 import styles from './Header.module.scss'
-import { Logo } from 'components/UI/Logo/Logo'
 import { Navigate } from './Navigate/Navigate'
-import { Search } from 'components/UI/Search/Search'
 
-export const Header: React.FC = () => {
+export const Header = () => {
   return (
     <>
       <div className={styles.header__wrap}>

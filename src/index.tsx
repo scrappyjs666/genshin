@@ -1,4 +1,4 @@
-import '../src/Styles/index.scss'
+import './Styles/index.scss'
 import './firebase'
 import React from 'react'
 import ReactDOM from 'react-dom/client'

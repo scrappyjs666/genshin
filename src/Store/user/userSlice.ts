@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { rejects } from 'assert'
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -13,23 +12,20 @@ const initialState: IUser = {
   email: null,
   id: null,
   status: 'loading',
+  textError: undefined,
 }
 
 export const googleSignIn = createAsyncThunk('user/googleSignIn', async () => {
-  try {
-    const auth = getAuth()
-    const provider = new GoogleAuthProvider()
-    await signInWithPopup(auth, provider).then(({ user }) => {
-      const data = user
-      return data
-    })
-  } catch (error) {
-    return error
-  }
+  const auth = getAuth()
+  const provider = new GoogleAuthProvider()
+  await signInWithPopup(auth, provider).then(({ user }) => {
+    const data = user
+    return data
+  })
 })
 
 export const signUp = createAsyncThunk(
-  'user/getUserInfo',
+  'user/signUp',
   async ({
     loginEmail,
     loginPassword,
@@ -38,14 +34,12 @@ export const signUp = createAsyncThunk(
     loginPassword: string
   }) => {
     const auth = getAuth()
-    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-      .then(({ user }) => {
-        console.log(user)
-        return user
-      })
-      .catch((error) => {
-        alert(error.message)
-      })
+    const res = await signInWithEmailAndPassword(
+      auth,
+      loginEmail,
+      loginPassword
+    )
+    return res.user
   }
 )
 
@@ -62,13 +56,8 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action) {
-      state.email = action.payload.email
-      state.id = action.payload.id
-    },
-    removeUser(state) {
-      state.email = null
-      state.id = null
+    changeErrorStatus(state) {
+      state.status = 'success'
     },
   },
   extraReducers: (builder) => {
@@ -82,14 +71,12 @@ const userSlice = createSlice({
         state.status = 'success'
         state.email = action.payload.email
         state.id = action.payload.uid
-        console.log(googleSignIn.rejected, 'googleSignIn.ff')
       }
     )
     builder.addCase(googleSignIn.rejected, (state) => {
       state.status = 'error'
       state.email = null
       state.id = null
-      console.log(googleSignIn.rejected, 'googleSignIn.rejected')
     })
     builder.addCase(createAcc.pending, (state) => {
       state.status = 'loading'
@@ -104,14 +91,31 @@ const userSlice = createSlice({
       }
     )
 
-    builder.addCase(createAcc.rejected, (state) => {
+    builder.addCase(createAcc.rejected, (state, action) => {
       state.status = 'error'
       state.email = null
       state.id = null
+      state.textError = action.error.message
+    })
+    builder.addCase(signUp.pending, (state) => {
+      state.status = 'loading'
+    })
+
+    builder.addCase(signUp.fulfilled, (state, action: PayloadAction<any>) => {
+      state.status = 'success'
+      state.email = action.payload.email
+      state.id = action.payload.uid
+    })
+
+    builder.addCase(signUp.rejected, (state, action) => {
+      state.status = 'error'
+      state.email = null
+      state.id = null
+      state.textError = action.error.message
     })
   },
 })
 
-export const { setUser, removeUser } = userSlice.actions
+export const { changeErrorStatus } = userSlice.actions
 
 export default userSlice.reducer

@@ -1,5 +1,5 @@
 import { AddHero, Filter, HeroCard, Loader } from 'components'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import {
   addItem,
@@ -13,7 +13,7 @@ import styles from './HeroPageList.module.scss'
 import imgBtnAdd from './img/add.svg'
 import imgBtn from './img/star.svg'
 
-const HeroPageList: React.FC = () => {
+const HeroPageList = () => {
   const [arrayLenght, setArrayLenght] = useState(10)
   const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useAppDispatch()
@@ -61,7 +61,7 @@ const HeroPageList: React.FC = () => {
     }
   })
 
-  const scrollHandler = (): void => {
+  const scrollHandler = () => {
     if (
       document.documentElement.scrollHeight -
         (document.documentElement.scrollTop + window.innerHeight) <

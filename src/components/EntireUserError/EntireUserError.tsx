@@ -1,15 +1,25 @@
 import cn from 'classnames'
-import { MouseEventHandler } from 'react'
-import { useAppSelector } from 'Store/hooks/hooks'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from 'Store/hooks/hooks'
+import { changeErrorStatus } from 'Store/user/userSlice'
 import styles from './EntireUserError.module.scss'
 import sadimage from './img/sad.png'
 
-interface IEntireUser {
-  fn?: MouseEventHandler<HTMLButtonElement> | undefined
-}
+export const EntireUserError = () => {
+  const dispatch = useAppDispatch()
+  const { status, textError } = useAppSelector((state) => state.userSlice)
 
-export const EntireUserError: React.FC<IEntireUser> = () => {
-  const { status } = useAppSelector((state) => state.userSlice)
+  const canselError = () => {
+    dispatch(changeErrorStatus())
+  }
+
+  useEffect(() => {
+    window.addEventListener('click', canselError)
+    return () => {
+      window.removeEventListener('click', canselError)
+    }
+  })
+
   return (
     <>
       <div
@@ -24,10 +34,13 @@ export const EntireUserError: React.FC<IEntireUser> = () => {
           className={styles.EntireUserError__container}
         >
           <img src={sadimage} alt="sadimage" />
-          <div className={styles.EntireUserError__text}>
-            Unfortunately, we could not find such an account please try again
-          </div>
-          <button className={styles.EntireUserError__button}>Try Again</button>
+          <div className={styles.EntireUserError__text}>{textError}</div>
+          <button
+            onClick={() => dispatch(changeErrorStatus())}
+            className={styles.EntireUserError__button}
+          >
+            Try Again
+          </button>
         </div>
       </div>
     </>

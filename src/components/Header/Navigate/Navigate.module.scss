@@ -9,3 +9,11 @@
 .Navigate__link {
   text-decoration: none;
 }
+
+@media screen and  (max-width:1440px) {
+  .Navigate__wrapp  {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+  }
+}

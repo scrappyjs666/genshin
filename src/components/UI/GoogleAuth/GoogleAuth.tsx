@@ -4,11 +4,7 @@ import { googleSignIn } from 'Store/user/userSlice'
 import styles from './GoogleAuth.module.scss'
 import google from './img/google.svg'
 
-interface IGoogleAuth {
-  googleSignIn: () => void
-}
-
-export const GoogleAuth: React.FC<IGoogleAuth> = () => {
+export const GoogleAuth = () => {
   const arrInfo = [{ name: google }]
   const dispatch = useAppDispatch()
   return (

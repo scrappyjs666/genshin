@@ -1,12 +1,12 @@
 .HomePage__Wrapper {
   display: flex;
   gap: 60px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media screen and (max-width:1170px) {
+  .HomePage__Wrapper {
+    display: grid;
+  }
 }
