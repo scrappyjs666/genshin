@@ -9,8 +9,13 @@ module.exports = configure({
     presets.typescript(),
     presets.react({
       version: 'detect',
-      newJSXTransform: true
+      newJSXTransform: true,
     }),
-    presets.imports()
+    presets.imports(),
   ],
+  extend: {
+    'rules': { 'import/no-unresolved': 'off' },
+    'import/no-named-as-default': 0,
+    'import/no-self-import': 'warning'
+  },
 })
