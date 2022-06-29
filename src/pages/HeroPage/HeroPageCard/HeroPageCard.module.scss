@@ -1,0 +1,24 @@
+.heroPageCard__container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 0 7px 7px #fff, 0 0 10px 10px #f23;
+  width: 310px;
+  height: 524px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  overflow: hidden;
+  justify-self: flex-end;
+}
+
+.heroPageCard__image {
+  position: absolute;
+  min-width: 240px;
+}

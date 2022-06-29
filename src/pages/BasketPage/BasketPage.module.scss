@@ -1,0 +1,55 @@
+.BasketPage__wrapper {
+  display: grid;
+  justify-content: center;
+  margin-top: 50px;
+  text-align: center;
+  gap: 20px;
+}
+
+.BasketPage__goods {
+  margin-bottom: 50px;
+  font-size: 40px;
+  text-shadow: 0 0 15px rgb(202, 223, 15);
+  font-weight: 600;
+}
+
+.Basket__chapter {
+  font-size: 30px;
+  text-shadow: 0 0 10px #fff;
+  font-weight: 400;
+}
+
+.basket__wrapper {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 15px;
+}
+
+.Swiper__title {
+  font-size: 30px;
+  margin: 25px 0;
+  font-weight: 400;
+  text-shadow: 0 0 20px #fff;
+}
+
+.Basket__auth  {
+  font-size: 30px;
+  text-shadow: 0px 0px 4px rgba(56, 169, 240, 0.75), 0px 0px 4px #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding-bottom: 1px;
+  border-bottom: 1px solid #fff;
+  cursor: pointer;
+}
+
+.Basket__link {
+  color: #fff;
+}
+

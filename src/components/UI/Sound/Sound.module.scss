@@ -1,0 +1,16 @@
+.Sound {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  padding: 5px 3px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: 1px solid #fff;
+  background-color: #fff;
+  box-shadow: 0 0 10px #f23, 0 0 10px rgb(191, 216, 76);
+  cursor: pointer;
+}
