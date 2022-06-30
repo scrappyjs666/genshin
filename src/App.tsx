@@ -26,10 +26,10 @@ const NotFoundPage = React.lazy(
 const App = () => {
   return (
     <>
-      <Suspense fallback={<Loader />}>
         <Header />
         <Container>
           <Basket />
+          <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/HeroPageList/:id" element={<HeroPageList />} />
@@ -39,8 +39,8 @@ const App = () => {
             <Route path="Profile" element={<Profile />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          </Suspense>
         </Container>
-      </Suspense>
     </>
   )
 }
