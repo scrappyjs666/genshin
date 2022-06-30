@@ -39,7 +39,7 @@
 - URL Parameters
 - Query Parameters
 - Обработка страницы 404 (Not Found)
-- Хуки `useLocation`/ `useParams`/ 'useNavigate
+- Хуки `useLocation`/ `useParams`/ `useNavigate`
 
 ### Redux-toolkit
 - Базовая структура react-redux-приложения
