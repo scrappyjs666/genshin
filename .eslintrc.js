@@ -16,7 +16,7 @@ module.exports = configure({
   extend: {
     rules: {
       'import/no-unresolved': 'off',
-      'import/no-self-import': 'warning',
+      'import/no-self-import': 'off',
     },
   },
 })
