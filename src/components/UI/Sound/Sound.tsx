@@ -28,6 +28,12 @@ export const Sound: React.FC = () => {
         {sound ? <IoVolumeMedium /> : <IoVolumeMute />}
       </button>
       <audio ref={audioRef} loop={true} controls style={{ display: 'none' }}>
+        <track
+          default
+          kind="captions"
+          srcLang="en"
+          src="/media/examples/friday.vtt"
+        />
         <source src={soundfile} type="audio/mp3" />
       </audio>
     </>

@@ -29,7 +29,7 @@ export const EntireUserError = () => {
             : styles.EntireUserError__wrap
         }
       >
-        <div
+        <button
           onClick={(e) => e.stopPropagation()}
           className={styles.EntireUserError__container}
         >
@@ -41,7 +41,7 @@ export const EntireUserError = () => {
           >
             Try Again
           </button>
-        </div>
+        </button>
       </div>
     </>
   )
