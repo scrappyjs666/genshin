@@ -20,7 +20,7 @@ export const Search: React.FC = () => {
     setInputValue(inputValueRedux)
   }, [inputValueRedux])
 
-  const placeholderText = 'Find your favorite character'
+  const placeholderText = 'Find your favorite.....'
 
   return (
     <div className={styles.search__wrapp}>
