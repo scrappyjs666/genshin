@@ -14,8 +14,9 @@ module.exports = configure({
     presets.imports(),
   ],
   extend: {
-    'rules': { 'import/no-unresolved': 'off' },
+    'rules': { 'import/no-unresolved': 'off',
     'import/no-named-as-default': 0,
     'import/no-self-import': 'warning'
+    }
   },
 })
