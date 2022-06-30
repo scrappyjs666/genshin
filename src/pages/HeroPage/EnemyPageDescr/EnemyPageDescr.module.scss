@@ -27,10 +27,13 @@
 }
 
 @media screen and  (max-width:990px) {
-  .EnemyPageDescr {
+  .descr {
     width: auto;
   }
   .visionImg {
     display: none;
+  }
+  .rarity {
+    display: block;
   }
 }
