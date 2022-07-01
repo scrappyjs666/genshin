@@ -7,7 +7,7 @@ export interface ICard {
   backColor?: string
   id?: string
   minHeight?: string
-  category?: string | undefined
+  category?: string
   addHero?: () => void
   findIndex?: () => void
   deleteItem?: () => void

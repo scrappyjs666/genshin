@@ -10,7 +10,7 @@ import HeroPageWrap from './HeroPageWrap'
 import startimg from './img/star.svg'
 import WeaponPageDescr from './WeaponPageDescr'
 
-const HeroPage: React.FC = () => {
+const HeroPage = () => {
   const dispatch = useAppDispatch()
   const { status, data } = useAppSelector((state) => state.heroPage)
 
@@ -38,7 +38,7 @@ const HeroPage: React.FC = () => {
       ) : (
         <HeroPageWrap title={urlParams[3]}>
           <HeroPageCard img={img} />
-          {urlCategory === 'characters' ? (
+          {urlCategory === 'characters' && (
             <HeroPageDescr
               affiliation={data?.affiliation}
               birthday={data?.birthday}
@@ -54,8 +54,8 @@ const HeroPage: React.FC = () => {
                 data?.vision.toLowerCase()
               )}/icon`}
             />
-          ) : null}
-          {urlCategory === 'enemies' ? (
+          )}
+          {urlCategory === 'enemies' && (
             <EnemyPageDescr
               id={data?.id}
               name={data?.name}
@@ -65,8 +65,8 @@ const HeroPage: React.FC = () => {
               family={data?.family}
               Faction={data?.faction}
             />
-          ) : null}
-          {urlCategory === 'weapons' ? (
+          )}
+          {urlCategory === 'weapons' && (
             <WeaponPageDescr
               ascensionMaterial={data?.ascensionMaterial}
               baseAttack={data?.baseAttack}
@@ -79,7 +79,7 @@ const HeroPage: React.FC = () => {
               type={data?.type}
               rarityImg={startimg}
             />
-          ) : null}
+          )}
         </HeroPageWrap>
       )}
     </>

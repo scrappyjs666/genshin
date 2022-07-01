@@ -4,7 +4,7 @@ import styles from './HeroPageCard.module.scss'
 
 interface IHeroPageCard {
   img: string
-  children?: JSX.Element
+  children?: React.ReactNode
 }
 
 const HeroPageCard: React.FC<IHeroPageCard> = ({ img, children }) => {

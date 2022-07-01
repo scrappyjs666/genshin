@@ -9,11 +9,9 @@ interface IButton {
 
 export const Button: React.FC<IButton> = ({ name, fn }) => {
   return (
-    <>
-      <button onClick={fn} className={styles.Button} type="button">
-        <IoIosFunnel />
-        {name}
-      </button>
-    </>
+    <button onClick={fn} className={styles.Button} type="button">
+      <IoIosFunnel />
+      {name}
+    </button>
   )
 }

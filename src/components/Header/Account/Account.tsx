@@ -19,16 +19,18 @@ export const Account = () => {
     </Link>
   )
 
+  if (loading) {
+    return (
+      <div className={styles.Account__Loading}>
+        Loading....
+        <div className={styles['lds-dual-ring']} />
+      </div>
+    )
+  }
+
   return (
     <>
-      {loading ? (
-        <div className={styles.Account__Loading}>
-          Loading....
-          <div className={styles['lds-dual-ring']} />
-        </div>
-      ) : (
-        <div className={styles.Account__text}>{user ? isSignUp : isLogin}</div>
-      )}
+      <div className={styles.Account__text}>{user ? isSignUp : isLogin}</div>
     </>
   )
 }

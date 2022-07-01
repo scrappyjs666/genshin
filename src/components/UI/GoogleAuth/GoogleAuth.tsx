@@ -6,20 +6,23 @@ import google from './img/google.svg'
 export const GoogleAuth = () => {
   const arrInfo = [{ name: google }]
   const dispatch = useAppDispatch()
+
+  const googleAuth = () => {
+    dispatch(googleSignIn())
+  }
+
   return (
-    <>
-      <div className={styles.GoogleAuth__wrap}>
-        {arrInfo.map((el) => (
-          <button
-            key={el.name}
-            type="button"
-            onClick={() => dispatch(googleSignIn())}
-            className={styles.GoogleAuth__link}
-          >
-            <img src={el.name} alt={el.name} />
-          </button>
-        ))}
-      </div>
-    </>
+    <div className={styles.GoogleAuth__wrap}>
+      {arrInfo.map((el) => (
+        <button
+          key={el.name}
+          type="button"
+          onClick={googleAuth}
+          className={styles.GoogleAuth__link}
+        >
+          <img src={el.name} alt={el.name} />
+        </button>
+      ))}
+    </div>
   )
 }

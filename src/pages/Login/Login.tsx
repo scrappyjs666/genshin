@@ -9,23 +9,19 @@ const Login = () => {
   const [user, loading] = useAuthState(auth)
   const { status } = useAppSelector((state) => state.userSlice)
 
-  const render = () => {
-    if (loading) {
-      return <Loader />
-    }
-
-    if (user) {
-      return <Welcome />
-    }
-
-    if (status === 'error') {
-      return <EntireUserError />
-    }
-
-    return <LoginForm />
+  if (loading) {
+    return <Loader />
   }
 
-  return <>{render()}</>
+  if (user) {
+    return <Welcome />
+  }
+
+  if (status === 'error') {
+    return <EntireUserError />
+  }
+
+  return <LoginForm />
 }
 
 export default Login

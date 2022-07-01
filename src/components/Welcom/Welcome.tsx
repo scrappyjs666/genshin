@@ -6,16 +6,15 @@ import styles from './Welcome.module.scss'
 export const Welcome = () => {
   const auth = getAuth()
   const [user] = useAuthState(auth)
+
   return (
-    <>
-      <div className={styles.Welcome__Wrap}>
-        <div className={styles.Welcome__text} />
-        Welcome {`${user?.email}`}
-        <div className={styles.Welcom__descr}>
-          Now your personal account is available for you
-        </div>
-        <img src={gif} alt="paimon" className={styles.Welcome__gif} />
+    <div className={styles.Welcome__Wrap}>
+      <div className={styles.Welcome__text} />
+      Welcome {`${user?.email}`}
+      <div className={styles.Welcom__descr}>
+        Now your personal account is available for you
       </div>
-    </>
+      <img src={gif} alt="paimon" className={styles.Welcome__gif} />
+    </div>
   )
 }

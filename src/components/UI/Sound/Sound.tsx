@@ -6,11 +6,9 @@ import styles from './Sound.module.scss'
 export const Sound: React.FC = () => {
   const [sound, setSound] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const soundToggle = () => {
-    setSound((curr) => curr === false)
-  }
 
-  const MusicPlay = () => {
+  const toggle = () => {
+    setSound((curr) => curr === false)
     if (audioRef.current) {
       sound === false ? audioRef.current.play() : audioRef.current.pause()
     }
@@ -18,13 +16,7 @@ export const Sound: React.FC = () => {
 
   return (
     <>
-      <button
-        onClick={() => {
-          soundToggle()
-          MusicPlay()
-        }}
-        className={styles.Sound}
-      >
+      <button onClick={toggle} className={styles.Sound}>
         {sound ? <IoVolumeMedium /> : <IoVolumeMute />}
       </button>
       <audio ref={audioRef} loop={true} controls style={{ display: 'none' }}>

@@ -7,17 +7,15 @@ import { Navigate } from './Navigate/Navigate'
 
 export const Header = () => {
   return (
-    <>
-      <div className={styles.header__wrap}>
-        <header className={styles.header}>
-          <Link to="/HomePage">
-            <Logo />
-          </Link>
-          <Search />
-          <Account />
-          <Navigate />
-        </header>
-      </div>
-    </>
+    <div className={styles.header__wrap}>
+      <header className={styles.header}>
+        <Link to="/HomePage">
+          <Logo />
+        </Link>
+        <Search />
+        <Account />
+        <Navigate />
+      </header>
+    </div>
   )
 }

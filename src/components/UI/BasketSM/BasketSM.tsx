@@ -7,14 +7,13 @@ import styles from './BasketSM.module.scss'
 const BasketSM = () => {
   const auth = getAuth()
   const [user] = useAuthState(auth)
+
   return (
-    <>
-      <Link to={user ? '/BasketPage' : '/'}>
-        <button className={styles.BasketSM__button}>
-          <IoBagCheckOutline />
-        </button>
-      </Link>
-    </>
+    <Link to={user ? '/BasketPage' : '/'}>
+      <button className={styles.BasketSM__button}>
+        <IoBagCheckOutline />
+      </button>
+    </Link>
   )
 }
 

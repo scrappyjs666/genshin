@@ -18,29 +18,23 @@ const Profile = () => {
   }
 
   return (
-    <>
-      <div className={styles.Profile__wrap}>
-        <img className={styles.EmptyPhoto} src={emptyPhoto} alt={emptyPhoto} />
-        <div className={styles.Profile__info}>
-          <div className={styles.Profile__text}>
-            Account creation: {user?.metadata.creationTime}
-          </div>
-          <div className={styles.Profile__text}>
-            Last session: {user?.metadata.lastSignInTime}
-          </div>
-          <Link
-            className={styles.Profile__link}
-            to="/BasketPage"
-            target="_blank"
-          >
-            <Button name="Basket" />
-          </Link>
-          <Link className={styles.Profile__link} to="/">
-            <Button fn={() => logOut()} name="Logout" />
-          </Link>
+    <div className={styles.Profile__wrap}>
+      <img className={styles.EmptyPhoto} src={emptyPhoto} alt={emptyPhoto} />
+      <div className={styles.Profile__info}>
+        <div className={styles.Profile__text}>
+          Account creation: {user?.metadata.creationTime}
         </div>
+        <div className={styles.Profile__text}>
+          Last session: {user?.metadata.lastSignInTime}
+        </div>
+        <Link className={styles.Profile__link} to="/BasketPage">
+          <Button name="Basket" />
+        </Link>
+        <Link className={styles.Profile__link} to="/">
+          <Button fn={() => logOut()} name="Logout" />
+        </Link>
       </div>
-    </>
+    </div>
   )
 }
 

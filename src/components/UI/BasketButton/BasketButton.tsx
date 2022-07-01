@@ -3,12 +3,10 @@ import styles from './BasketButton.module.scss'
 
 export const Basket = () => {
   return (
-    <>
-      <Link className={styles.basket} to="/BasketPage">
-        GO
-        <br />
-        favorites
-      </Link>
-    </>
+    <Link className={styles.basket} to="/BasketPage">
+      GO
+      <br />
+      favorites
+    </Link>
   )
 }

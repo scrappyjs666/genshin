@@ -14,15 +14,13 @@ const HomePage: React.FC = () => {
   ]
 
   return (
-    <>
-      <div className={styles.HomePage__Wrapper}>
-        {arrInfo.map((el) => (
-          <Link key={el.name} to={`/HeroPageList/${el.link}`}>
-            <HeroPageCard img={el.name!} />
-          </Link>
-        ))}
-      </div>
-    </>
+    <div className={styles.HomePage__Wrapper}>
+      {arrInfo.map((el) => (
+        <Link key={el.name} to={`/HeroPageList/${el.link}`}>
+          <HeroPageCard img={el.name!} />
+        </Link>
+      ))}
+    </div>
   )
 }
 

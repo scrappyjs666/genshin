@@ -6,7 +6,7 @@ import { AddHero } from 'components/AddHero/AddHero'
 import { HeroCard } from 'components/HeroCard/HeroCard'
 import { getAuth } from 'firebase/auth'
 import { Item } from 'pages/HeroPageList/types'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Link } from 'react-router-dom'
 import { removeItem } from 'Store/heroList/heroListSlice'
@@ -17,11 +17,29 @@ import styles from './BasketPage.module.scss'
 import imgBtn from './img/star.svg'
 
 const SwiperBakset: React.FC = () => {
+  const auth = getAuth()
+  const [user, loading] = useAuthState(auth)
+
   const colorBtn = useAppSelector((state) => state.heroList.backColor)
   const dispatch = useAppDispatch()
   const heroes = useAppSelector((state) => state.heroList.items)
-  const auth = getAuth()
-  const [user, loading] = useAuthState(auth)
+
+  const added = 'added to favorites'
+  const hvHero = 'You have not been added to favorites yet Characters'
+
+  const isHero = useMemo(
+    () => heroes.filter((el: { id: string }) => el.id === 'characters'),
+    [heroes]
+  )
+  const isEnemies = useMemo(
+    () => heroes.filter((el: { id: string }) => el.id === 'enemies'),
+    [heroes]
+  )
+  const isWeapons = useMemo(
+    () => heroes.filter((el: { id: string }) => el.id === 'weapons'),
+    [heroes]
+  )
+
   if (loading) return <Loader />
   if (!user)
     return (
@@ -30,17 +48,10 @@ const SwiperBakset: React.FC = () => {
       </Link>
     )
 
-  const added = 'added to favorites'
-  const hvHero = 'You have not been added to favorites yet Characters'
-
-  const isHero = heroes.findIndex((el) => el.id === 'characters')
-  const isEnemies = heroes.findIndex((el) => el.id === 'enemies')
-  const isWeapons = heroes.findIndex((el) => el.id === 'weapons')
-
   return (
     <div className={styles.basket__wrapper}>
       <div className={styles.Swiper__title}>Your favorites Heroes</div>
-      {isHero !== -1 ? (
+      {isHero.length > 0 ? (
         <Swiper
           modules={[EffectCards]}
           effect="cards"
@@ -48,22 +59,20 @@ const SwiperBakset: React.FC = () => {
           className="mySwiper"
           style={{ width: '330px', height: '554px' }}
         >
-          {heroes
-            .filter((el: { id: string }) => el.id === 'characters')
-            .map((el: Item) => (
-              <SwiperSlide key={el.item}>
-                <HeroCard
-                  category={el.id}
-                  id={el.item}
-                  title={el.item}
-                  backColor={colorBtn}
-                  btnText={added}
-                  imgBtn={imgBtn}
-                  deleteItem={() => dispatch(removeItem(el.item))}
-                  img={`images/characters/${el.item}/gacha-card`}
-                />
-              </SwiperSlide>
-            ))}
+          {isHero.map((el: Item) => (
+            <SwiperSlide key={el.item}>
+              <HeroCard
+                category={el.id}
+                id={el.item}
+                title={el.item}
+                backColor={colorBtn}
+                btnText={added}
+                imgBtn={imgBtn}
+                deleteItem={() => dispatch(removeItem(el.item))}
+                img={`images/characters/${el.item}/gacha-card`}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       ) : (
         <Link to="/HeroPageList/characters">
@@ -71,7 +80,7 @@ const SwiperBakset: React.FC = () => {
         </Link>
       )}
       <div className={styles.Swiper__title}>Your favorites Enemies</div>
-      {isEnemies !== -1 ? (
+      {isEnemies.length > 0 ? (
         <Swiper
           style={{ width: '276px', height: '286px' }}
           modules={[EffectCards]}
@@ -79,22 +88,20 @@ const SwiperBakset: React.FC = () => {
           grabCursor={true}
           className="mySwiper"
         >
-          {heroes
-            .filter((el: { id: string }) => el.id === 'enemies')
-            .map((el: Item) => (
-              <SwiperSlide key={el.item}>
-                <HeroCard
-                  category={el.id}
-                  id={el.item}
-                  btnText={added}
-                  backColor={colorBtn}
-                  title={el.item}
-                  imgBtn={imgBtn}
-                  deleteItem={() => dispatch(removeItem(el.item))}
-                  img={`images/enemies/${el.item}/icon`}
-                />
-              </SwiperSlide>
-            ))}
+          {isEnemies.map((el: Item) => (
+            <SwiperSlide key={el.item}>
+              <HeroCard
+                category={el.id}
+                id={el.item}
+                btnText={added}
+                backColor={colorBtn}
+                title={el.item}
+                imgBtn={imgBtn}
+                deleteItem={() => dispatch(removeItem(el.item))}
+                img={`images/enemies/${el.item}/icon`}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       ) : (
         <Link to="/HeroPageList/enemies">
@@ -102,7 +109,7 @@ const SwiperBakset: React.FC = () => {
         </Link>
       )}
       <div className={styles.Swiper__title}>Your favorites Weapons</div>
-      {isWeapons !== -1 ? (
+      {isWeapons.length > 0 ? (
         <Swiper
           style={{ width: '286px', height: 'auto' }}
           modules={[EffectCards]}
@@ -110,22 +117,20 @@ const SwiperBakset: React.FC = () => {
           grabCursor={true}
           className="mySwiper"
         >
-          {heroes
-            .filter((el: { id: string }) => el.id === 'weapons')
-            .map((el: Item) => (
-              <SwiperSlide key={el.item}>
-                <HeroCard
-                  category={el.id}
-                  id={el.item}
-                  btnText={added}
-                  backColor={colorBtn}
-                  title={el.item}
-                  imgBtn={imgBtn}
-                  deleteItem={() => dispatch(removeItem(el.item))}
-                  img={`images/weapons/${el.item}/icon`}
-                />
-              </SwiperSlide>
-            ))}
+          {isWeapons.map((el: Item) => (
+            <SwiperSlide key={el.item}>
+              <HeroCard
+                category={el.id}
+                id={el.item}
+                btnText={added}
+                backColor={colorBtn}
+                title={el.item}
+                imgBtn={imgBtn}
+                deleteItem={() => dispatch(removeItem(el.item))}
+                img={`images/weapons/${el.item}/icon`}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       ) : (
         <Link to="/HeroPageList/weapons">

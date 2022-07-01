@@ -21,29 +21,27 @@ export const EntireUserError = () => {
   })
 
   return (
-    <>
-      <div
-        className={
-          status === 'error'
-            ? cn(styles.EntireUserError__wrap, styles.modal__active)
-            : styles.EntireUserError__wrap
-        }
+    <div
+      className={
+        status === 'error'
+          ? cn(styles.EntireUserError__wrap, styles.modal__active)
+          : styles.EntireUserError__wrap
+      }
+    >
+      <button
+        onClick={(e) => e.stopPropagation()}
+        className={styles.EntireUserError__container}
       >
+        <img src={sadimage} alt="sadimage" />
+        <div className={styles.EntireUserError__text}>{textError}</div>
         <button
-          onClick={(e) => e.stopPropagation()}
-          className={styles.EntireUserError__container}
+          onClick={() => dispatch(changeErrorStatus())}
+          className={styles.EntireUserError__button}
         >
-          <img src={sadimage} alt="sadimage" />
-          <div className={styles.EntireUserError__text}>{textError}</div>
-          <button
-            onClick={() => dispatch(changeErrorStatus())}
-            className={styles.EntireUserError__button}
-          >
-            Try Again
-          </button>
+          Try Again
         </button>
-      </div>
-    </>
+      </button>
+    </div>
   )
 }
 

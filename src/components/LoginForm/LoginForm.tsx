@@ -8,13 +8,8 @@ export const LoginForm = () => {
     setIsFlipper((curr) => curr === false)
   }
 
-  return (
-    <>
-      {isFlipped === true ? (
-        <BackCard flippedCard={() => cardToggle()} />
-      ) : (
-        <FrontCard flippedCard={() => cardToggle()} />
-      )}
-    </>
-  )
+  const MyComponent = isFlipped ? BackCard : FrontCard;
+
+  return <MyComponent flippedCard={cardToggle} />
+
 }

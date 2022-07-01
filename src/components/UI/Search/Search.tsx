@@ -6,16 +6,19 @@ import closeIcon from './img/close-icon.svg'
 import search from './img/search.svg'
 import styles from './Search.module.scss'
 
-export const Search: React.FC = () => {
+export const Search = () => {
   const [inputValue, setInputValue] = useState('')
   const dispatch = useAppDispatch()
+
   const changeInputValue = debounce(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       dispatch(inputChangeValue(e.target.value))
     },
     200
   )
+
   const inputValueRedux = useAppSelector((state) => state.inputSlice.inputValue)
+
   useEffect(() => {
     setInputValue(inputValueRedux)
   }, [inputValueRedux])

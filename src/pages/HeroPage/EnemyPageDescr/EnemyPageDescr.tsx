@@ -11,15 +11,8 @@ interface IEnemyPageDescr {
   Faction: string | undefined
 }
 
-const EnemyPageDescr: React.FC<IEnemyPageDescr> = ({
-  id,
-  name,
-  description,
-  region,
-  type,
-  family,
-  Faction,
-}) => {
+const EnemyPageDescr: React.FC<IEnemyPageDescr> = (props) => {
+  const { id, name, description, region, type, family, Faction } = props
   return (
     <>
       <div className={styles.EnemyPageDescr}>
